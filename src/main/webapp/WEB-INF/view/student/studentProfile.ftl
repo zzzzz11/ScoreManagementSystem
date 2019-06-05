@@ -39,20 +39,20 @@
                                                 <input value=${stu.number} class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-control-label">专业</label>
-                                                <input value=${stu.major.name} class="form-control">
-                                            </div>
-                                            <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-6">
-                                                        <label class="form-control-label">GBA</label>
+                                                        <label class="form-control-label">学院</label>
                                                         <input value=${stu.gba} class="form-control">
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <label class="form-control-label">学分</label>
+                                                        <label class="form-control-label">年级与专业</label>
                                                         <input value=${stu.credit} class="form-control">
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-control-label">当前校区</label>
+                                                <input value=${stu.major.name} class="form-control">
                                             </div>
                                         </form>
                                     </fieldset>
