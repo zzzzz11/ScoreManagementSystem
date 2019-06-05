@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zrquan.sms.dao.ScoreDao">
+    <resultMap id="ScoreResultMap" type="org.zrquan.sms.entity.Score">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="value" property="value" jdbcType="DOUBLE"/>
+        <result column="identity" property="identity" jdbcType="TINYINT"/>
+        <association property="course"
+                     column="course_id"
+                     select="org.zrquan.sms.dao.CourseDao.getCourseById"/>
+        <association property="student"
+                     column="student_id"
+                     select="org.zrquan.sms.dao.StudentDao.getStudentById"/>
+    </resultMap>
+
+    <select id="getScoreByStudentNumber" resultMap="ScoreResultMap">
+        select *
+        from score
+        where student_id = (
+            select id
+            from student
+            where snumber = #{stuNumber}
+        )
+    </select>
+
+</mapper>

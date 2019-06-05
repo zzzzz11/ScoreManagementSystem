@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zrquan.sms.dao.UserDao">
+    <resultMap id="UserResultMap" type="org.zrquan.sms.entity.User">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="account_number" jdbcType="VARCHAR" property="accountNumber"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="user_type" jdbcType="CHAR" property="userType"/>
+    </resultMap>
+
+    <insert id="addUser" parameterType="User" useGeneratedKeys="true">
+        insert into user (account_number, user_name, password, user_type)
+        values (#{accountNumber}, #{userName}, md5(#{password}), #{userType})
+    </insert>
+
+    <select id="getUserByAccountNumber" resultMap="UserResultMap">
+        select *
+        from user
+        where account_number = #{accountNumber}
+    </select>
+
+</mapper>

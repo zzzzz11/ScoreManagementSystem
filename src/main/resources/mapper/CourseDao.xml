@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zrquan.sms.dao.CourseDao">
+    <resultMap id="CourseResultMap" type="org.zrquan.sms.entity.Course">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="course_name" jdbcType="VARCHAR" property="name"/>
+        <result column="credit" jdbcType="INTEGER" property="credit"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="period" jdbcType="INTEGER" property="period"/>
+        <result column="average" jdbcType="DOUBLE" property="average"/>
+        <result column="normal_distribution" jdbcType="VARCHAR" property="normalDistribution"/>
+        <association property="teacher"
+                     column="teacher_id"
+                     select="org.zrquan.sms.dao.TeacherDao.getTeacherById"/>
+    </resultMap>
+
+    <select id="getCourseById" resultMap="CourseResultMap">
+        select *
+        from course
+        where id = #{id}
+    </select>
+
+</mapper>

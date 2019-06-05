@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zrquan.sms.dao.DepartmentDao">
+    <resultMap id="DepartmentResultMap" type="org.zrquan.sms.entity.Department">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="department_name" jdbcType="VARCHAR" property="name"/>
+    </resultMap>
+
+    <select id="getDeptById" resultMap="DepartmentResultMap">
+        select *
+        from department
+        where id = #{id}
+    </select>
+
+</mapper>

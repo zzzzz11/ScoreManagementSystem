@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zrquan.sms.dao.StudentDao">
+    <resultMap id="StudentResultMap" type="org.zrquan.sms.entity.Student">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="snumber" jdbcType="VARCHAR" property="number"/>
+        <result column="sname" jdbcType="VARCHAR" property="name"/>
+        <result column="class" jdbcType="VARCHAR" property="clazz"/>
+        <result column="gba" jdbcType="INTEGER" property="gba"/>
+        <result column="credit" jdbcType="DOUBLE" property="credit"/>
+        <association property="major"
+                     column="major_id"
+                     select="org.zrquan.sms.dao.MajorDao.getMajorById"/>
+    </resultMap>
+
+    <select id="getStudentByNumber" resultMap="StudentResultMap">
+        select *
+        from student
+        where snumber = #{number}
+    </select>
+
+    <select id="getStudentById" resultMap="StudentResultMap">
+        select *
+        from student
+        where id = #{id}
+    </select>
+
+</mapper>

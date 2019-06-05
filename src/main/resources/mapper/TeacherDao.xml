@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zrquan.sms.dao.TeacherDao">
+    <resultMap id="TeacherResultMap" type="org.zrquan.sms.entity.Teacher">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="tnumber" jdbcType="VARCHAR" property="number"/>
+        <result column="tname" jdbcType="VARCHAR" property="name"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <association property="dept"
+                     column="department_id"
+                     select="org.zrquan.sms.dao.DepartmentDao.getDeptById"/>
+    </resultMap>
+
+    <select id="getTeacherById" resultMap="TeacherResultMap">
+        select *
+        from teacher
+        where id = #{id}
+    </select>
+
+</mapper>

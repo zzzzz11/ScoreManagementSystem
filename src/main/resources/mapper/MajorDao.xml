@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zrquan.sms.dao.MajorDao">
+    <resultMap id="MajorResultMap" type="org.zrquan.sms.entity.Major">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="major_name" jdbcType="VARCHAR" property="name"/>
+        <association property="dept"
+                     column="department_id"
+                     select="org.zrquan.sms.dao.DepartmentDao.getDeptById"/>
+    </resultMap>
+
+    <select id="getMajorById" resultMap="MajorResultMap">
+        select *
+        from major
+        where id = #{id}
+    </select>
+
+</mapper>
