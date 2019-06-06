@@ -18,4 +18,25 @@ public interface StudentService {
 	 * @return JSON字符串
 	 */
 	String getScoreInfo(String number);
+
+	/**
+	 * 添加学生
+	 *
+	 * @param student
+	 */
+	void addStudent(Student student);
+
+	/**
+	 * 修改学生信息
+	 *
+	 * @param student
+	 */
+	void updateStudent(Student student);
+
+	/**
+	 * 删除学生
+	 *
+	 * @param number
+	 */
+	void deleteStudentByNumber(String number);
 }

@@ -5,4 +5,6 @@ import org.zrquan.sms.entity.Teacher;
 
 public interface TeacherDao {
 	Teacher getTeacherById(@Param("id") int id);
+
+	Teacher getTeacherByNumber(String number);
 }

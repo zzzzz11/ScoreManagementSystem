@@ -33,4 +33,19 @@ public class StudentServiceImpl implements StudentService {
 
 		return result;
 	}
+
+	@Override
+	public void addStudent(Student student) {
+
+	}
+
+	@Override
+	public void updateStudent(Student student) {
+
+	}
+
+	@Override
+	public void deleteStudentByNumber(String number) {
+
+	}
 }
