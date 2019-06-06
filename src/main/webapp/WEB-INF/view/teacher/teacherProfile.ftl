@@ -32,21 +32,21 @@
                                         <form>
                                             <div class="form-group">
                                                 <label class="form-control-label">姓名</label>
-                                                <input value="" class="form-control">
+                                                <input value=${teach.name} class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-control-label">学号</label>
-                                                <input value="" class="form-control">
+                                                <label class="form-control-label">工号</label>
+                                                <input value=${teach.number} class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <label class="form-control-label">学院</label>
-                                                        <input value="" class="form-control">
+                                                        <input value=${teach.dept.name} class="form-control">
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <label class="form-control-label">年级与专业</label>
-                                                        <input value="" class="form-control">
+                                                        <label class="form-control-label">职称</label>
+                                                        <input value=${teach.title} class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
