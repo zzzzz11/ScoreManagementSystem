@@ -17,6 +17,8 @@ import java.io.File;
 @Controller
 @RequestMapping("teacher")
 public class TeacherController {
+	@Autowired
+	TeacherServiceImpl teacherService;
 
     @Autowired
     TeacherServiceImpl teacherService;
@@ -68,8 +70,14 @@ public class TeacherController {
 	/**
 	 * 教师个人信息（主页）
 	 */
-	@RequestMapping(value = {"profile"})
-	public String getTeacherProfile(Model model) {
+	@RequestMapping(value = {"profile", "main"})
+	public String getTeacherProfile(Model model,
+									HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		String number = user.getAccountNumber();
+		Teacher teacher = teacherService.getTeacherInfo(number);
+
+		model.addAttribute("teach", teacher);
 
 		return "teacher/teacherProfile";
 	}

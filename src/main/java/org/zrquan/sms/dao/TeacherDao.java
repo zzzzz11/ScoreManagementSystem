@@ -7,4 +7,6 @@ public interface TeacherDao {
     Teacher getTeacherByNumber(@Param("number") String number);
 
 	Teacher getTeacherById(@Param("id") int id);
+
+	Teacher getTeacherByNumber(String number);
 }

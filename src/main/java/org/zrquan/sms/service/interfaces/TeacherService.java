@@ -4,19 +4,19 @@ import org.zrquan.sms.entity.Teacher;
 
 public interface TeacherService {
 
-    /**
-     * 学生个人信息
-     *
-     * @param number 学号
-     * @return 学生对象
-     */
-    Teacher getTeacherInfo(String number);
+	/**
+	 * 获取教师个人信息
+	 *
+	 * @param number 工号
+	 * @return 教师对象
+	 */
+	Teacher getTeacherInfo(String number);
 
-    /**
-     * 获取成绩信息
-     *
-     * @param number 学生学号
-     * @return JSON字符串
-     */
-    String getCourseInfo(String number);
+	/**
+	 * 获取某个教师的课程信息
+	 *
+	 * @param number 工号
+	 * @return JSON 字符串
+	 */
+	String getCourseInfo(String number);
 }
