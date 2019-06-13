@@ -20,4 +20,9 @@
         where account_number = #{accountNumber}
     </select>
 
+    <select id="retrieveUser" resultMap="UserResultMap">
+        select *
+        from user;
+    </select>
+
 </mapper>

@@ -20,6 +20,11 @@
         where id = #{id}
     </select>
 
+    <select id="retrieveCourse" resultMap="CourseResultMap">
+        select *
+        from course
+    </select>
+
     <select id="getCourseByTeacherNumber" resultMap="CourseResultMap">
         select *
         from course

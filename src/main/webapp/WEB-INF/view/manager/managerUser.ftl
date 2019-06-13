@@ -67,9 +67,9 @@
                                             <label for="uploadImage" class="btn btn-block btn-dark">切换头像</label>
                                             <input type="file" name="avatar" value="" id="uploadImage" hidden="hidden">
                                         </div>
-<#--                                        <div class="form-group">-->
-<#--                                            <input type="submit" value="Signin" class="btn btn-primary">-->
-<#--                                        </div>-->
+                                        <#--                                        <div class="form-group">-->
+                                        <#--                                            <input type="submit" value="Signin" class="btn btn-primary">-->
+                                        <#--                                        </div>-->
                                     </form>
                                 </div>
                             </div>

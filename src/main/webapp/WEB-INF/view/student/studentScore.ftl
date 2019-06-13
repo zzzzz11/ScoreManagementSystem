@@ -1,17 +1,20 @@
 <#include "studentMacro.ftl">
 <@student keywords="学生成绩" js=["js/charts-custom.js"]>
 
+    <!-- 模块标题 -->
     <header class="page-header">
         <div class="container-fluid">
             <h2 class="no-margin-bottom">成绩详情</h2>
         </div>
     </header>
 
+    <!-- 内容区 -->
     <section class="charts">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
 
+                    <!-- 课程成绩 -->
                     <div class="card">
                         <div class="card-close">
                             <div class="dropdown">
@@ -19,8 +22,8 @@
                                         aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i>
                                 </button>
                                 <div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow">
-                                    <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a
-                                            href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a>
+                                    <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a>
+                                    <a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a>
                                 </div>
                             </div>
                         </div>
@@ -28,13 +31,24 @@
                             <h3 class="h4">Score table</h3>
                         </div>
 
-                        <div class="form-inline" style="margin-left:30px;margin-top:20px;">
+                        <!-- 查询表单 -->
+                        <form class="form-inline" method="post" action="" style="margin-left:30px;margin-top:20px;">
                             <div class="form-inline" style="margin-right:30px;">
                                 <label for="" size="20">培养方案:&#160;&#160;&#160;&#160;</label>
                                 <select class="form-control" name="" id="">
                                     <option>主修</option>
                                     <option>辅修</option>
                                     <option>双学位</option>
+                                </select>
+                            </div>
+
+                            <div class="form-inline" style="margin-right:30px;">
+                                <label for="" size="20">课程类型:&#160;&#160;&#160;&#160;</label>
+                                <select class="form-control" name="" id="">
+                                    <option>专必</option>
+                                    <option>公必</option>
+                                    <option>专选</option>
+                                    <option>公选</option>
                                 </select>
                             </div>
 
@@ -55,29 +69,8 @@
                                 </select>
                             </div>
 
-                            <button type="button" class="btn btn-primary">查询</button>
-                        </div>
-
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="" id=""
-                                           value="option1"> 公必
-                                </label>
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="" id=""
-                                           value="option2"> 专必
-                                </label>
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="" id=""
-                                           value="option3"> 专选
-                                </label>
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="" id=""
-                                           value="option4"> 公选
-                                </label>
-                            </div>
-                        </div>
+                            <button type="submit" class="btn btn-primary">查询</button>
+                        </form>
 
                         <div class="card-body">
                             <div class="table-responsive">
@@ -87,18 +80,12 @@
                                     <thead>
                                     <tr>
                                         <th>课程</th>
+                                        <th>分数</th>
+                                        <th>绩点</th>
+                                        <th>排名</th>
                                         <th>类型</th>
                                         <th>教师</th>
-                                        <th>学年</th>
-                                        <th>学期</th>
-                                        <th>原始成绩</th>
-                                        <th>最终成绩</th>
-                                        <th>特殊原因</th>
-                                        <th>绩点</th>
-                                        <th>考试性质</th>
                                         <th>是否通过</th>
-                                        <th>教学班排名</th>
-                                        <th>年级专业排名</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -115,6 +102,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 学分详情 -->
                     <div class="card">
                         <div class="card-close">
                             <div class="dropdown">
@@ -181,7 +169,6 @@
                             <tr>
                                 <td>专选</td>
                                 <td class="ng-binding">15.0</td>
-                                <td class="ng-binding">15.0</td>
                                 <td class="ng-binding">3.533</td>
                                 <td class="ng-binding">25.0</td>
                                 <td class="ng-binding">25.0</td>
@@ -207,6 +194,7 @@
                         </table>
 
                     </div>
+                    <!-- 学分详情 -->
                     <div class="card">
                         <div class="card-close">
                             <div class="dropdown">
@@ -316,23 +304,43 @@
                         </div>
 
                     </div>
+                    <!-- 可视化 -->
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="line-chart-example card">
                                 <div class="card-close">
                                     <div class="dropdown">
-                                        <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i>
+                                        <button type="button" id="closeCard1" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i
+                                                    class="fa fa-ellipsis-v"></i>
                                         </button>
-                                        <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow">
-                                            <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a>
+                                        <div aria-labelledby="closeCard1"
+                                             class="dropdown-menu dropdown-menu-right has-shadow">
+                                            <a href="#" class="dropdown-item remove"> <i
+                                                        class="fa fa-times"></i>Close</a><a href="#"
+                                                                                            class="dropdown-item edit">
+                                                <i class="fa fa-gear"></i>Edit</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-header d-flex align-items-center">
                                     <h3 class="h4">Line Chart Example</h3>
                                 </div>
-                                <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                    <canvas id="lineChartExample" width="642" height="321" class="chartjs-render-monitor" style="display: block; width: 642px; height: 321px;"></canvas>
+                                <div class="card-body">
+                                    <div class="chartjs-size-monitor"
+                                         style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                        <div class="chartjs-size-monitor-expand"
+                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink"
+                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                        </div>
+                                    </div>
+                                    <canvas id="lineChartExample" width="642" height="321"
+                                            class="chartjs-render-monitor"
+                                            style="display: block; width: 642px; height: 321px;"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -340,18 +348,37 @@
                             <div class="pie-chart-example card">
                                 <div class="card-close">
                                     <div class="dropdown">
-                                        <button type="button" id="closeCard7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i>
+                                        <button type="button" id="closeCard7" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i
+                                                    class="fa fa-ellipsis-v"></i>
                                         </button>
-                                        <div aria-labelledby="closeCard7" class="dropdown-menu dropdown-menu-right has-shadow">
-                                            <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a>
+                                        <div aria-labelledby="closeCard7"
+                                             class="dropdown-menu dropdown-menu-right has-shadow">
+                                            <a href="#" class="dropdown-item remove"> <i
+                                                        class="fa fa-times"></i>Close</a><a href="#"
+                                                                                            class="dropdown-item edit">
+                                                <i class="fa fa-gear"></i>Edit</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-header d-flex align-items-center">
                                     <h3 class="h4">Doughnut Chart Example</h3>
                                 </div>
-                                <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                    <canvas id="doughnutChartExample" width="350" height="340" class="chartjs-render-monitor" style="display: block; width: 350px; height: 340px;"></canvas>
+                                <div class="card-body">
+                                    <div class="chartjs-size-monitor"
+                                         style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                        <div class="chartjs-size-monitor-expand"
+                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink"
+                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                        </div>
+                                    </div>
+                                    <canvas id="doughnutChartExample" width="350" height="340"
+                                            class="chartjs-render-monitor"
+                                            style="display: block; width: 350px; height: 340px;"></canvas>
                                 </div>
                             </div>
                         </div>
