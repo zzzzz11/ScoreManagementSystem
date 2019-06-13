@@ -1,5 +1,5 @@
-<#include "teacherMacro.ftl">
-<@teacher keywords="教师信息" js=["js/edit.js"]>
+<#include "managerMacro.ftl">
+<@manager keywords="管理员信息" js=["js/edit.js"]>
     <header class="page-header">
         <div class="container-fluid">
             <h2 class="no-margin-bottom">个人信息</h2>
@@ -35,14 +35,15 @@
                                                 <input value="" class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-control-label">id</label>
+                                                <label class="form-control-label">编号</label>
                                                 <input value="" class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-control-label">所属学院</label>
-                                                <input value="" class="form-control">
+                                                <div class="col-lg-6">
+                                                        <label class="form-control-label">学院</label>
+                                                        <input value="" class="form-control">
+                                                </div>
                                             </div>
-                                        </form>
                                     </fieldset>
                                 </div>
                                 <#-- TODO: 头像上传 -->
@@ -55,9 +56,9 @@
                                             <label for="uploadImage" class="btn btn-block btn-dark">切换头像</label>
                                             <input type="file" name="avatar" value="" id="uploadImage" hidden="hidden">
                                         </div>
-                                        <#--                                        <div class="form-group">-->
-                                        <#--                                            <input type="submit" value="Signin" class="btn btn-primary">-->
-                                        <#--                                        </div>-->
+<#--                                        <div class="form-group">-->
+<#--                                            <input type="submit" value="Signin" class="btn btn-primary">-->
+<#--                                        </div>-->
                                     </form>
                                 </div>
                             </div>
@@ -67,4 +68,4 @@
             </div>
         </div>
     </section>
-</@teacher>
+</@manager>
