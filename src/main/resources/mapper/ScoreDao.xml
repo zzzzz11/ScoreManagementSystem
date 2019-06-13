@@ -23,4 +23,18 @@
         )
     </select>
 
+    <select id="getScoreByTeacherNumber" resultMap="ScoreResultMap">
+        select *
+        from score
+        where course_id=(
+            select id
+            from course
+            where teacher_id=(
+                select id
+                from teacher
+                where tnumber=#{teacherNumber}
+        )
+        )
+    </select>
+
 </mapper>
