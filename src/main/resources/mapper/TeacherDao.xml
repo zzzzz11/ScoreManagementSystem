@@ -17,4 +17,10 @@
         where id = #{id}
     </select>
 
+    <select id="getTeacherByNumber" resultMap="TeacherResultMap">
+        select *
+        from teacher
+        where tnumber = #{number}
+    </select>
+
 </mapper>
