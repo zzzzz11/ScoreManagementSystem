@@ -20,4 +20,14 @@
         where id = #{id}
     </select>
 
+    <select id="getCourseByTeacherNumber" resultMap="CourseResultMap">
+        select *
+        from course
+        where teacher_id = (
+            select id
+            from teacher
+            where tnumber=#{tNumber}
+        )
+    </select>
+
 </mapper>
