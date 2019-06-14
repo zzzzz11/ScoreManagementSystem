@@ -9,6 +9,7 @@ import org.zrquan.sms.entity.Score;
 import org.zrquan.sms.entity.Student;
 import org.zrquan.sms.service.interfaces.StudentService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,9 +29,7 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public String getScoreInfo(String number) {
 		List<Score> score = scoreDao.getScoreByStudentNumber(number);
-
 		String result = JSON.toJSONString(score);
-
 		return result;
 	}
 }

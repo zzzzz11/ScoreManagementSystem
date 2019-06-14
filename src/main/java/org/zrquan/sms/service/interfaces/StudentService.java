@@ -1,4 +1,6 @@
 package org.zrquan.sms.service.interfaces;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.zrquan.sms.entity.Student;
 
@@ -18,4 +20,5 @@ public interface StudentService {
 	 * @return JSON字符串
 	 */
 	String getScoreInfo(String number);
+
 }
