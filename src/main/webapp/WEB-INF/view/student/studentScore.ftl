@@ -92,9 +92,26 @@
                                     <#list json as record>
                                         <tr>
                                             <td>${record.course.name}</td>
-                                            <td>${record.value}</td>
                                             <td>${record.course.type}</td>
                                             <td>${record.course.teacher.name}</td>
+                                            <td>${record.course.year}</td>
+                                            <td>${record.course.term}</td>
+                                            <td>${record.value}</td>
+                                            <td>${record.value}</td>
+                                            <td></td>
+                                            <#assign credit>${record.value/20}</#assign>
+                                            <td>${credit}</td>
+                                            <td>${record.course.test_form}</td>
+                                            <#assign isPassed>${record.identity}</#assign>
+                                            <td>
+                                                <#if isPassed=="1">
+                                                    不及格
+                                                <#else>
+                                                    及格
+                                                </#if>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     </#list>
                                     </tbody>
