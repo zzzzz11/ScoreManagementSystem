@@ -1,5 +1,5 @@
 <#include "managerMacro.ftl">
-<@manager> keywords="教务管理员信息" js=["js/edit.js"]>
+<@manager keywords="教务管理员信息" js=["js/edit.js"]>
     <header class="page-header">
         <div class="container-fluid">
             <h2 class="no-margin-bottom">个人信息</h2>
@@ -32,27 +32,15 @@
                                         <form>
                                             <div class="form-group">
                                                 <label class="form-control-label">姓名</label>
-                                                <input value=${teach.name} class="form-control">
+                                                <input value="${managerInfo.name}" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label">工号</label>
-                                                <input value=${teach.number} class="form-control">
+                                                <input value="${managerInfo.number}" class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <label class="form-control-label">学院</label>
-                                                        <input value=${teach.dept.name} class="form-control">
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <label class="form-control-label">职称</label>
-                                                        <input value=${teach.title} class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-control-label">当前校区</label>
-                                                <input value="" class="form-control">
+                                                <label class="form-control-label">负责学院</label>
+                                                <input value="${managerInfo.department.name}" class="form-control">
                                             </div>
                                         </form>
                                     </fieldset>
@@ -67,9 +55,6 @@
                                             <label for="uploadImage" class="btn btn-block btn-dark">切换头像</label>
                                             <input type="file" name="avatar" value="" id="uploadImage" hidden="hidden">
                                         </div>
-<#--                                        <div class="form-group">-->
-<#--                                            <input type="submit" value="Signin" class="btn btn-primary">-->
-<#--                                        </div>-->
                                     </form>
                                 </div>
                             </div>

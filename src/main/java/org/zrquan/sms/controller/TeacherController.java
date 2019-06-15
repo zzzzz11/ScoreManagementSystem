@@ -54,7 +54,7 @@ public class TeacherController {
 	/**
 	 * 成绩查看
 	 */
-	@RequestMapping(value = {"score"})
+	@RequestMapping("score")
 	public String getTeacherScore(Model model) {
 
 		return "teacher/teacherScore";
@@ -64,7 +64,7 @@ public class TeacherController {
 	/**
 	 * 教师个人信息（主页）
 	 */
-	@RequestMapping(value = {"profile"})
+	@RequestMapping("profile")
 	public String getTeacherProfile(Model model,
 									HttpSession session) {
 		User user = (User) session.getAttribute("user");

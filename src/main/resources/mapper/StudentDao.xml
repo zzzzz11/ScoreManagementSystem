@@ -13,6 +13,11 @@
                      select="org.zrquan.sms.dao.MajorDao.getMajorById"/>
     </resultMap>
 
+    <insert id="create" parameterType="Student" useGeneratedKeys="true" keyProperty="id">
+        insert into student(snumber, sname, major_id, class)
+        values (#{student.number}, #{student.name}, #{student.major.id}, #{student.clazz})
+    </insert>
+
     <select id="getStudentByNumber" resultMap="StudentResultMap">
         select *
         from student
@@ -23,6 +28,11 @@
         select *
         from student
         where id = #{id}
+    </select>
+
+    <select id="retrieveStudent" resultMap="StudentResultMap">
+        select *
+        from student
     </select>
 
 </mapper>

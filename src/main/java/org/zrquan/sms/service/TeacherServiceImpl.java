@@ -30,27 +30,13 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public String getCourseInfo(String number) {
-
-
 		List<Course> course = courseDao.getCourseByTeacherNumber(number);
-
 		String result = JSON.toJSONString(course);
-
 		return result;
 	}
 
 	@Override
-	public void addTeacher(Teacher teacher) {
-
-	}
-
-	@Override
 	public void updateTeacher(Teacher teacher) {
-
-	}
-
-	@Override
-	public void deleteTeacherByNumber(String number) {
 
 	}
 }

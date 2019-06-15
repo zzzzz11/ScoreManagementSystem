@@ -80,11 +80,14 @@
                                     <thead>
                                     <tr>
                                         <th>课程</th>
+                                        <th>类型</th>
+                                        <th>教师</th>
                                         <th>分数</th>
                                         <th>绩点</th>
                                         <th>排名</th>
-                                        <th>类型</th>
-                                        <th>教师</th>
+                                        <th>学年</th>
+                                        <th>学期</th>
+                                        <th>考试方式</th>
                                         <th>是否通过</th>
                                     </tr>
                                     </thead>
@@ -94,14 +97,13 @@
                                             <td>${record.course.name}</td>
                                             <td>${record.course.type}</td>
                                             <td>${record.course.teacher.name}</td>
-                                            <td>${record.course.year}</td>
-                                            <td>${record.course.term}</td>
                                             <td>${record.value}</td>
-                                            <td>${record.value}</td>
-                                            <td></td>
                                             <#assign credit>${record.value/20}</#assign>
                                             <td>${credit}</td>
-                                            <td>${record.course.test_form}</td>
+                                            <td></td>
+                                            <td>${record.course.year} - ${record.course.year?eval + 1}</td>
+                                            <td>${record.course.term!""}</td>
+                                            <td>${record.course.testForm!""}</td>
                                             <#assign isPassed>${record.identity}</#assign>
                                             <td>
                                                 <#if isPassed=="1">

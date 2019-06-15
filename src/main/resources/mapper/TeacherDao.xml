@@ -11,6 +11,17 @@
                      select="org.zrquan.sms.dao.DepartmentDao.getDeptById"/>
     </resultMap>
 
+    <insert id="create" parameterType="Teacher" useGeneratedKeys="true" keyProperty="id">
+        insert into teacher(tnumber, tname, department_id, title)
+        values (#{teacher.number}, #{teacher.name}, #{teacher.dept.id}, #{teacher.title})
+    </insert>
+
+    <delete id="deleteById">
+        delete
+        from teacher
+        where id = #{id}
+    </delete>
+
     <select id="getTeacherById" resultMap="TeacherResultMap">
         select *
         from teacher
@@ -21,6 +32,17 @@
         select *
         from teacher
         where tnumber = #{number}
+    </select>
+
+    <select id="getTeacherByName" resultMap="TeacherResultMap">
+        <bind name="pattern" value="'%' + teacherName + '%'"/>
+        select *
+        from teacher
+        where tname like #{pattern}
+    </select>
+    <select id="retrieveTeacher" resultMap="TeacherResultMap">
+        select *
+        from teacher
     </select>
 
 </mapper>

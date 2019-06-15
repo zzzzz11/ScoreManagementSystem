@@ -12,4 +12,8 @@ public interface CourseDao {
 	List<Course> retrieveCourse();
 
 	List<Course> getCourseByTeacherNumber(@Param("tNumber") String tnumber);
+
+	int create(@Param("course") Course course);
+
+	int deleteById(@Param("id") int id);
 }

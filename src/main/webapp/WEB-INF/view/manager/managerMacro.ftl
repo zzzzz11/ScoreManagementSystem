@@ -23,8 +23,10 @@
                                 <i class="icon-flask"></i>教学
                             </a>
                             <ul id="education" class="collapse list-unstyled ">
-                                <li><a href="${ctx}/manager/course">课程信息</a></li>
                                 <li><a href="${ctx}/manager/score">成绩审核</a></li>
+                                <li><a href="${ctx}/manager/course">课程管理</a></li>
+                                <li><a href="${ctx}/manager/student">学生信息</a></li>
+                                <li><a href="${ctx}/manager/teacher">教师信息</a></li>
                             </ul>
                         </li>
                         <li>
@@ -41,16 +43,9 @@
                             </a>
                             <ul id="system" class="collapse list-unstyled ">
                                 <li><a href="${ctx}/manager/profile">个人信息</a></li>
-                                <li><a href="${ctx}/manager/profile">用户管理</a></li>
+                                <li><a href="${ctx}/manager/user">用户管理</a></li>
+                                <li><a href="">意见反馈</a></li>
                             </ul>
-                        </li>
-                    </ul>
-                    <span class="heading">Extras</span>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#">
-                                <i class="icon-mail"></i>意见反馈
-                            </a>
                         </li>
                     </ul>
                 </nav>

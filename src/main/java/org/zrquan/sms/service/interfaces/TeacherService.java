@@ -20,24 +20,11 @@ public interface TeacherService {
 	 */
 	String getCourseInfo(String number);
 
-	/**
-	 * 添加教师
-	 *
-	 * @param teacher
-	 */
-	void addTeacher(Teacher teacher);
 
 	/**
-	 * 修改教师信息
+	 * 修改个人信息
 	 *
 	 * @param teacher
 	 */
 	void updateTeacher(Teacher teacher);
-
-	/**
-	 * 删除教师
-	 *
-	 * @param number
-	 */
-	void deleteTeacherByNumber(String number);
 }
