@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zrquan.sms.dao.ManagerDao">
+    <resultMap id="ManagerResultMap" type="org.zrquan.sms.entity.Manager">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="ename" jdbcType="VARCHAR" property="name"/>
+        <result column="enumber" jdbcType="VARCHAR" property="number"/>
+        <association column="dept_id"
+                     property="department"
+                     select="org.zrquan.sms.dao.DepartmentDao.getDeptById"/>
+    </resultMap>
+
+    <insert id="create" parameterType="Manager" useGeneratedKeys="true" keyProperty="id">
+        insert into educational_manager(enumber, ename, dept_id)
+        values (#{manager.number}, #{manager.name}, #{manager.department.id})
+    </insert>
+
+    <select id="getManagerByNumber" resultMap="ManagerResultMap">
+        select *
+        from educational_manager
+        where enumber = #{number}
+    </select>
+
+</mapper>

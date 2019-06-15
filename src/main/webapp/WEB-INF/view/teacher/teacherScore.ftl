@@ -8,16 +8,17 @@
     </header>
 
     <script type="text/javascript">
-            function edit(){
-                var mod=document.getElementById("btn").parentElement.parentElement.children[2];
-                mod.innerHTML="<input type=text />"
-                document.getElementById("btn").parentElement.innerHTML="<button id=\"btn\" class=\"btn btn-primary\" onclick=\"modify();\">修改</button>";
-            }
-            function modify() {
-                var mod=document.getElementById("btn").parentElement.parentElement.children[2];
-                mod.innerHTML="修改后的值"
-                document.getElementById("btn").parentElement.innerHTML="<button id=\"btn\" class=\"btn btn-primary\" onclick=\"edit();\">编辑</button>";
-            }
+        function edit() {
+            var mod = document.getElementById("btn").parentElement.parentElement.children[2];
+            mod.innerHTML = "<input type=text />"
+            document.getElementById("btn").parentElement.innerHTML = "<button id=\"btn\" class=\"btn btn-primary\" onclick=\"modify();\">修改</button>";
+        }
+
+        function modify() {
+            var mod = document.getElementById("btn").parentElement.parentElement.children[2];
+            mod.innerHTML = "修改后的值"
+            document.getElementById("btn").parentElement.innerHTML = "<button id=\"btn\" class=\"btn btn-primary\" onclick=\"edit();\">编辑</button>";
+        }
     </script>
 
     <section class="charts">
@@ -42,7 +43,9 @@
                                 <td>甲</td>
                                 <td>61</td>
                                 <td>是</td>
-                                <td><button id="btn" class="btn btn-primary" onclick="edit();">编辑</button></td>
+                                <td>
+                                    <button id="btn" class="btn btn-primary" onclick="edit();">编辑</button>
+                                </td>
                             </tr>
                             <tr>
                                 <td>16369002</td>

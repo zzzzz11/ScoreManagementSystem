@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.zrquan.sms.dao.ScoreDao">
-    <resultMap id="UpdateScoreResultMap" type="org.zrquan.sms.entity.Score">
+<mapper namespace="org.zrquan.sms.dao.TempScoreDao">
+    <resultMap id="TempScoreResultMap" type="org.zrquan.sms.entity.Score">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="value" property="value" jdbcType="INTEGER"/>
         <result column="indentity" property="identity" jdbcType="INTEGER"/>
@@ -13,14 +13,15 @@
                      select="org.zrquan.sms.dao.StudentDao.getStudentById"/>
     </resultMap>
 
-    <insert id="addUpdateScore" parameterType="Score" useGeneratedKeys="true">
-        insert into update_score (course_id, student_id, `value`, `identity`)
-        values (#{course_id}, #{student_id}, #{value}, #{identity})
+    <insert id="addTempScore" parameterType="Score" useGeneratedKeys="true" keyProperty="id">
+        insert into score_check (course_id, student_id, value, gpa)
+        values (#{score.course.id}, #{score.student.id}, #{score.value}, #{score.gpa})
     </insert>
 
-    <delete id="deleteUpdateStudent" parameterType="Score">
-        DELETE FROM update_score
-        WHERE (student_id = #{studentID}  and course_id = #{course_id})
+    <delete id="deleteTempScore" parameterType="Score">
+        delete
+        from score_check
+        where (student_id = #{score.student.id} and course_id = #{score.course.id})
     </delete>
 
 </mapper>

@@ -21,23 +21,17 @@ public interface TeacherService {
 	String getCourseInfo(String number);
 
 	/**
-	 * 添加教师
+	 * 提交成绩（未审核）
 	 *
-	 * @param teacher
+	 * @param scoreJson 成绩列表
+	 * @return 是否成功
 	 */
-	void addTeacher(Teacher teacher);
+	boolean submitScore(String scoreJson);
 
 	/**
-	 * 修改教师信息
+	 * 修改个人信息
 	 *
-	 * @param teacher
+	 * @param teacher 教师对象
 	 */
-	void updateTeacher(Teacher teacher);
-
-	/**
-	 * 删除教师
-	 *
-	 * @param number
-	 */
-	void deleteTeacherByNumber(String number);
+	boolean updateTeacher(Teacher teacher);
 }

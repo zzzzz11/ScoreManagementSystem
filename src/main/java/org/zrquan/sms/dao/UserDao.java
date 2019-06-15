@@ -9,7 +9,7 @@ public interface UserDao {
 
 	User getUserByAccountNumber(@Param("accountNumber") String accountNumber);
 
-	void addUser(@Param("user") User user);
+	int addUser(@Param("user") User user);
 
 	List<User> retrieveUser();
 }
