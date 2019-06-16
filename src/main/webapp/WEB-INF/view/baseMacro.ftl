@@ -1,3 +1,4 @@
+<#setting number_format="computer">
 <#compress>
     <#macro base base_title base_keywords="" base_js=[] base_css=[]>
         <#assign ctx=request.contextPath />
@@ -65,7 +66,7 @@
                             <div class="navbar-header">
                                 <a href="#" class="navbar-brand d-none d-sm-inline-block">
                                     <div class="brand-text d-none d-lg-inline-block">
-                                        <span>Bootstrap </span><strong>Dashboard</strong>
+                                        <strong>Score </strong><span>Management System</span>
                                     </div>
                                     <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
                                 </a>
