@@ -33,7 +33,10 @@
                                 <th>学号</th>
                                 <th>姓名</th>
                                 <th>成绩</th>
+                                <th>绩点</th>
+                                <th>排名</th>
                                 <th>是否及格</th>
+                                <th>审核状态</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -42,7 +45,10 @@
                                 <td>16369001</td>
                                 <td>甲</td>
                                 <td>61</td>
+                                <td></td>
+                                <td></td>
                                 <td>是</td>
+                                <td></td>
                                 <td>
                                     <button id="btn" class="btn btn-primary" onclick="edit();">编辑</button>
                                 </td>
@@ -51,13 +57,21 @@
                                 <td>16369002</td>
                                 <td>乙</td>
                                 <td>59</td>
+                                <td></td>
+                                <td></td>
                                 <td>否</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>16369011</td>
                                 <td>丙</td>
                                 <td>69</td>
+                                <td></td>
+                                <td></td>
                                 <td>是</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             </tbody>
                         </table>

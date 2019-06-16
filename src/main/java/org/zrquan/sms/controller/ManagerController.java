@@ -13,199 +13,202 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("manager")
 public class ManagerController {
-	@Autowired
-	CommonServiceImpl commonService;
-	@Autowired
-	ManagerServiceImpl managerService;
+    @Autowired
+    CommonServiceImpl commonService;
+    @Autowired
+    ManagerServiceImpl managerService;
 
-	/**
-	 * 设置用户基本信息
-	 */
-	@ModelAttribute
-	public void setUserInfo(Model model,
-							HttpSession session) {
+    /**
+     * 设置用户基本信息
+     */
+    @ModelAttribute
+    public void setUserInfo(Model model,
+                            HttpSession session) {
 
-		User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
 
-		model.addAttribute("name", user.getUserName());
-		model.addAttribute("number", user.getAccountNumber());
-	}
+        model.addAttribute("name", user.getUserName());
+        model.addAttribute("number", user.getAccountNumber());
+    }
 
-	/**
-	 * 个人信息页面
-	 */
-	@RequestMapping(value = {"profile"})
-	public String getManagerProfile(Model model,
-									HttpSession session) {
+    /**
+     * 个人信息页面
+     */
+    @RequestMapping(value = {"profile"})
+    public String getManagerProfile(Model model,
+                                    HttpSession session) {
 
-		User user = (User) session.getAttribute("user");
-		Manager manager = managerService.getPersonalInfo(user.getAccountNumber());
+        User user = (User) session.getAttribute("user");
+        Manager manager = managerService.getPersonalInfo(user.getAccountNumber());
 
-		model.addAttribute("managerInfo", manager);
+        model.addAttribute("managerInfo", manager);
 
-		return "manager/managerProfile";
-	}
+        return "manager/managerProfile";
+    }
 
-	/**
-	 * 成绩审核页面
-	 */
-	@RequestMapping(value = {"score"})
-	public String auditScore(Model model) {
+    /**
+     * 成绩审核页面
+     */
+    @RequestMapping(value = {"score"})
+    public String auditScore(Model model) {
 
-		return "manager/managerScore";
-	}
+        return "manager/managerScore";
+    }
 
-	@RequestMapping(value = {"detail"})
-	public String getManagerDetail(Model model) {
+    @RequestMapping(value = {"detail"})
+    public String getManagerDetail(Model model) {
 
-		return "manager/managerDetail";
-	}
+        return "manager/managerDetail";
+    }
 
-	/**
-	 * 课程管理页
-	 */
-	@RequestMapping(value = {"course", "main"})
-	public String manageCourseInfo(Model model,
-								   @RequestParam(value = "message", required = false) String message) {
-		String courseJson = managerService.getCourseInfo();
-		model.addAttribute("courses", courseJson);
+    /**
+     * 课程管理页
+     */
+    @RequestMapping(value = {"course", "main"})
+    public String manageCourseInfo(Model model,
+                                   @RequestParam(value = "message", required = false) String message) {
+        String courseJson = managerService.getCourseInfo();
+        if (message != null && !message.equals(""))
+            model.addAttribute("message", message);
+        model.addAttribute("courses", courseJson);
 
-		return "manager/managerCourse";
-	}
+        return "manager/managerCourse";
+    }
 
-	/**
-	 * 教师管理页
-	 */
-	@RequestMapping("teacher")
-	public String manageTeacherInfo(Model model,
-									@RequestParam(value = "message", required = false) String message) {
-		String teacherJson = managerService.getTeacherInfo();
-		model.addAttribute("teachers", teacherJson);
+    /**
+     * 教师管理页
+     */
+    @RequestMapping("teacher")
+    public String manageTeacherInfo(Model model,
+                                    @RequestParam(value = "message", required = false) String message) {
+        String teacherJson = managerService.getTeacherInfo();
+        model.addAttribute("teachers", teacherJson);
 
-		return "manager/managerTeacher";
-	}
+        return "manager/managerTeacher";
+    }
 
-	/**
-	 * 学生管理页
-	 */
-	@RequestMapping("student")
-	public String manageStudentInfo(Model model,
-									@RequestParam(value = "message", required = false) String message) {
-		String studentJson = managerService.getStudentInfo();
-		model.addAttribute("students", studentJson);
+    /**
+     * 学生管理页
+     */
+    @RequestMapping("student")
+    public String manageStudentInfo(Model model,
+                                    @RequestParam(value = "message", required = false) String message) {
+        String studentJson = managerService.getStudentInfo();
+        model.addAttribute("students", studentJson);
 
-		return "manager/managerStudent";
-	}
+        return "manager/managerStudent";
+    }
 
-	/**
-	 * 查询功能
-	 *
-	 * @param key     查询对象（课程、用户等）
-	 * @param value   查询条件（名字、类型等）
-	 * @param content 检索词
-	 * @return Json
-	 */
-	@RequestMapping(value = "search/{key}/{value}", produces = "application/json; charset=utf-8")
-	@ResponseBody
-	public String search(@PathVariable String key,
-						 @PathVariable String value,
-						 @RequestParam String content) {
+    /**
+     * 查询功能
+     *
+     * @param key     查询对象（课程、用户等）
+     * @param value   查询条件（名字、类型等）
+     * @param content 检索词
+     * @return Json
+     */
+    @RequestMapping(value = "search/{key}/{value}", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String search(@PathVariable String key,
+                         @PathVariable String value,
+                         @RequestParam String content) {
 
-		String result = "";
-		if (key.equals("course")) {
-			result = managerService.searchCourse(value, content);
-		}
-		if (key.equals("user")) {
-			result = managerService.searchUser(value, content);
-		}
+            String result = "";
+            if (key.equals("course")) {
+                result = managerService.searchCourse(value, content);
+            }
+            if (key.equals("user")) {
+                result = managerService.searchUser(value, content);
+            }
 
-		return result;
-	}
+            return result;
 
-	/**
-	 * 增加课程
-	 */
-	@RequestMapping("add/course")
+    }
 
-	public String addCourse(Model model,
-							@ModelAttribute Course course,
-							@RequestParam String teacherName) {
+    /**
+     * 增加课程
+     */
+    @RequestMapping("add/course")
 
-		boolean success = managerService.addCourse(course, teacherName);
-		if (success) {
-			model.addAttribute("message", "添加成功！");
-		} else {
-			model.addAttribute("message", "添加失败，务必先完善教师信息。");
-		}
+    public String addCourse(Model model,
+                            @ModelAttribute Course course,
+                            @RequestParam String teacherName) {
 
-		return "redirect:/manager/course";
-	}
+        boolean success = managerService.addCourse(course, teacherName);
+        if (success) {
+            model.addAttribute("message", "添加成功！");
+        } else {
+            model.addAttribute("message", "添加失败，务必先完善教师信息。");
+        }
 
-	/**
-	 * 增加教师
-	 */
-	@RequestMapping("add/teacher")
-	public String addTeacher(Model model,
-							 @ModelAttribute Teacher teacher,
-							 @RequestParam int deptId) {
+        return "redirect:/manager/course";
+    }
 
-		boolean success = managerService.addTeacher(teacher, deptId);
-		if (success) {
-			model.addAttribute("message", "添加成功！");
-		} else {
-			model.addAttribute("message", "添加失败，务必先完善教师信息。");
-		}
+    /**
+     * 增加教师
+     */
+    @RequestMapping("add/teacher")
+    public String addTeacher(Model model,
+                             @ModelAttribute Teacher teacher,
+                             @RequestParam int deptId) {
 
-		return "redirect:/manager/user";
-	}
+        boolean success = managerService.addTeacher(teacher, deptId);
+        if (success) {
+            model.addAttribute("message", "添加成功！");
+        } else {
+            model.addAttribute("message", "添加失败，务必先完善教师信息。");
+        }
 
-	/**
-	 * 增加学生
-	 */
-	@RequestMapping("add/student")
-	public String addStudent(Model model,
-							 @ModelAttribute Student student,
-							 @RequestParam int majorId) {
+        return "redirect:/manager/user";
+    }
 
-		boolean success = managerService.addStudent(student, majorId);
-		if (success) {
-			model.addAttribute("message", "添加成功！");
-		} else {
-			model.addAttribute("message", "添加失败，务必先完善教师信息。");
-		}
+    /**
+     * 增加学生
+     */
+    @RequestMapping("add/student")
+    public String addStudent(Model model,
+                             @ModelAttribute Student student,
+                             @RequestParam int majorId) {
 
-		return "redirect:/manager/user";
-	}
+        boolean success = managerService.addStudent(student, majorId);
+        if (success) {
+            model.addAttribute("message", "添加成功！");
+        } else {
+            model.addAttribute("message", "添加失败，务必先完善教师信息。");
+        }
 
-	@RequestMapping("add/manager")
-	public String addManager(Model model,
-							 @ModelAttribute Manager manager,
-							 @RequestParam int deptId,
-							 @RequestParam String email,
-							 @RequestParam String phone) {
+        return "redirect:/manager/user";
+    }
 
-		boolean success = managerService.addManager(manager, deptId, email, phone);
-		if (success) {
-			model.addAttribute("message", "添加成功！");
-		} else {
-			model.addAttribute("message", "添加失败，务必先完善教师信息。");
-		}
+    @RequestMapping("add/manager")
+    public String addManager(Model model,
+                             @ModelAttribute Manager manager,
+                             @RequestParam int deptId,
+                             @RequestParam String email,
+                             @RequestParam String phone) {
 
-		return "redirect:/manager/user";
-	}
+        boolean success = managerService.addManager(manager, deptId, email, phone);
+        if (success) {
+            model.addAttribute("message", "添加成功！");
+        } else {
+            model.addAttribute("message", "添加失败，务必先完善教师信息。");
+        }
 
-	/**
-	 * 用户管理页
-	 */
-	@RequestMapping("user")
-	public String manageUserInfo(Model model) {
-		String userJson = managerService.getUserInfo();
-		String deptJson = commonService.retrieveDept();
-		String majorJson = commonService.retrieveMajor();
-		model.addAttribute("users", userJson);
-		model.addAttribute("depts", deptJson);
-		model.addAttribute("majors", majorJson);
+        return "redirect:/manager/user";
+    }
 
-		return "manager/managerUser";
-	}
+    /**
+     * 用户管理页
+     */
+    @RequestMapping("user")
+    public String manageUserInfo(Model model) {
+        String userJson = managerService.getUserInfo();
+        String deptJson = commonService.retrieveDept();
+        String majorJson = commonService.retrieveMajor();
+        model.addAttribute("users", userJson);
+        model.addAttribute("depts", deptJson);
+        model.addAttribute("majors", majorJson);
+
+        return "manager/managerUser";
+    }
 }
