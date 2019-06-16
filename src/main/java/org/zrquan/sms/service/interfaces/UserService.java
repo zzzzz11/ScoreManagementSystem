@@ -7,4 +7,6 @@ public interface UserService {
 	boolean verify(String accountNumber, String password);
 
 	User getUer(String accountNumber);
+
+	//TODO: void setAvatar();
 }

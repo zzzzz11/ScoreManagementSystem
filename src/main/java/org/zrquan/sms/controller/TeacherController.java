@@ -31,9 +31,40 @@ public class TeacherController {
 	}
 
 	/**
-	 * 教师个人信息
+	 * 教师教学课程查看
+	 * 添加成绩
 	 */
-	@RequestMapping(value = {"profile", "main"})
+	@RequestMapping(value = {"course", "main"})
+	public String getTeacherCourse(Model model,
+								   HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		String number = user.getAccountNumber();
+		String courseInfo = teacherService.getCourseInfo(number);
+
+		model.addAttribute("course", courseInfo);
+
+		return "teacher/teacherCourse";
+	}
+//    public String setTeacherScore(HttpServletRequest request,
+//                                  @RequestParam("File") File score){
+//
+//        return "teacher/teacherCourse";
+//    }
+
+	/**
+	 * 成绩查看
+	 */
+	@RequestMapping("score")
+	public String getTeacherScore(Model model) {
+
+		return "teacher/teacherScore";
+	}
+
+
+	/**
+	 * 教师个人信息（主页）
+	 */
+	@RequestMapping("profile")
 	public String getTeacherProfile(Model model,
 									HttpSession session) {
 		User user = (User) session.getAttribute("user");
@@ -44,4 +75,5 @@ public class TeacherController {
 
 		return "teacher/teacherProfile";
 	}
+
 }

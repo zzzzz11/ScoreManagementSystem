@@ -28,9 +28,8 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public String getScoreInfo(String number) {
 		List<Score> score = scoreDao.getScoreByStudentNumber(number);
-
 		String result = JSON.toJSONString(score);
-
 		return result;
 	}
+
 }

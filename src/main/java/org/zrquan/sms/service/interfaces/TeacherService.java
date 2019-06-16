@@ -19,4 +19,19 @@ public interface TeacherService {
 	 * @return JSON 字符串
 	 */
 	String getCourseInfo(String number);
+
+	/**
+	 * 提交成绩（未审核）
+	 *
+	 * @param scoreJson 成绩列表
+	 * @return 是否成功
+	 */
+	boolean submitScore(String scoreJson);
+
+	/**
+	 * 修改个人信息
+	 *
+	 * @param teacher 教师对象
+	 */
+	boolean updateTeacher(Teacher teacher);
 }

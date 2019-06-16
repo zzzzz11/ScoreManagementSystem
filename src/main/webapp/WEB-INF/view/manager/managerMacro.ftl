@@ -1,7 +1,7 @@
 <#compress>
-    <#macro teacher keywords="" js=[] css=[]>
+    <#macro manager keywords="" js=[] css=[]>
         <#include "../baseMacro.ftl">
-        <@base base_title="教师界面" base_keywords="教师" base_js=js base_css=css>
+        <@base base_title="教务管理员界面" base_keywords="教务管理员" base_js=js base_css=css>
             <div class="page-content d-flex align-items-stretch">
                 <!-- Side Navbar -->
                 <nav class="side-navbar">
@@ -13,7 +13,7 @@
                         <div class="title">
                             <h1 class="h4">${name}</h1>
                             <p>${number}</p>
-                            <p>教师</p>
+                            <p>教务管理员</p>
                         </div>
                     </div>
                     <span class="heading">Main</span>
@@ -23,7 +23,10 @@
                                 <i class="icon-flask"></i>教学
                             </a>
                             <ul id="education" class="collapse list-unstyled ">
-                                <li><a href="${ctx}/teacher/course">课程查询</a></li>
+                                <li><a href="${ctx}/manager/score">成绩审核</a></li>
+                                <li><a href="${ctx}/manager/course">课程管理</a></li>
+                                <li><a href="${ctx}/manager/student">学生信息</a></li>
+                                <li><a href="${ctx}/manager/teacher">教师信息</a></li>
                             </ul>
                         </li>
                         <li>
@@ -31,7 +34,7 @@
                                 <i class="icon-user"></i>联系
                             </a>
                             <ul id="contact" class="collapse list-unstyled ">
-                                <li><a href="${ctx}/teacher/temp">班级通讯录</a></li>
+                                <li><a href="${ctx}/manager/temp">通讯录</a></li>
                             </ul>
                         </li>
                         <li>
@@ -39,16 +42,10 @@
                                 <i class="icon-screen"></i>系统
                             </a>
                             <ul id="system" class="collapse list-unstyled ">
-                                <li><a href="${ctx}/teacher/profile">个人信息</a></li>
+                                <li><a href="${ctx}/manager/profile">个人信息</a></li>
+                                <li><a href="${ctx}/manager/user">用户管理</a></li>
+                                <li><a href="">意见反馈</a></li>
                             </ul>
-                        </li>
-                    </ul>
-                    <span class="heading">Extras</span>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#">
-                                <i class="icon-mail"></i>意见反馈
-                            </a>
                         </li>
                     </ul>
                 </nav>
