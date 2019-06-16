@@ -12,4 +12,6 @@ public interface UserDao {
 	int addUser(@Param("user") User user);
 
 	List<User> retrieveUser();
+
+	List<User> searchByCondition(@Param("condition") String condition, @Param("keyword") String keyword);
 }

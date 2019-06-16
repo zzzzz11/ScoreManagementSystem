@@ -48,4 +48,25 @@
             where tnumber = #{tNumber}
         )
     </select>
+
+    <select id="searchByCondition" resultMap="CourseResultMap">
+        <bind name="pattern" value="'%' + keyword + '%'"/>
+        select *
+        from course where
+        <choose>
+            <when test="condition == 'type'">
+                type like #{pattern}
+            </when>
+            <when test="condition == 'teacher'">
+                teacher_id in (
+                select t.id
+                from teacher t
+                where t.tname like #{pattern}
+                )
+            </when>
+            <when test="condition == 'name'">
+                course_name like #{pattern}
+            </when>
+        </choose>
+    </select>
 </mapper>

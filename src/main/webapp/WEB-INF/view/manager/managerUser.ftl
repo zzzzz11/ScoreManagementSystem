@@ -23,8 +23,12 @@
                                                 </button>
                                                 <div class="dropdown-menu" x-placement="bottom-start"
                                                      style="position: absolute; will-change: transform; top: 0; left: 0; transform: translate3d(0px, 38px, 0px);">
-                                                    <button onclick="searchName()" class="dropdown-item">用户名</button>
-                                                    <button onclick="searchType()" class="dropdown-item">类型</button>
+                                                    <button onclick="search(this)" data-value="name"
+                                                            class="dropdown-item">用户名
+                                                    </button>
+                                                    <button onclick="search(this)" data-value="type"
+                                                            class="dropdown-item">类型
+                                                    </button>
                                                     <div class="dropdown-divider"></div>
                                                     <button onclick="void(0)" class="dropdown-item">模糊</button>
                                                 </div>
@@ -268,6 +272,25 @@
 
         function searchType() {
             $("#search").attr("action", "${ctx}/managerInfo/search/user/type").submit();
+        }
+
+        function search(option) {
+            let params = {};
+            params.content = $("#search input").val();
+            let condition = option.getAttribute("data-value");
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "${ctx}/manager/search/user/" + condition,
+                data: params,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
         }
 
         function contactMajorId() {

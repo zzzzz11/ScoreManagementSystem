@@ -1,5 +1,5 @@
 <#include "studentMacro.ftl">
-<@student keywords="学生成绩" js=["js/charts-custom.js"]>
+<@student keywords="学生成绩" js=["js/charts-custom.js", "js/mycharts.js"]>
 
     <!-- 模块标题 -->
     <header class="page-header">
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="card-header d-flex align-items-center">
-                            <h3 class="h4">Score table</h3>
+                            <h3 class="h4">成绩查询</h3>
                         </div>
 
                         <!-- 查询表单 -->
@@ -135,7 +135,7 @@
                             </div>
                         </div>
                         <div class="card-header d-flex align-items-center">
-                            <h3 class="h4">Score table</h3>
+                            <h3 class="h4">学分详情</h3>
                         </div>
 
                         <table class="table table-bordered ranking-all ng-scope" ng-repeat="item in creditSituationList"
@@ -227,105 +227,117 @@
                             </div>
                         </div>
                         <div class="card-header d-flex align-items-center">
-                            <h3 class="h4">Score table</h3>
+                            <h3 class="h4">学分详情</h3>
                         </div>
 
                         <div class="container">
-                            <div class="row" style:="font-size:12px;">
-                                <div class="col-1">类型</div>
-                                <div class="col-2">平均学分绩点</div>
-                                <div class="col-1">应修学分</div>
-                                <div class="col-1">已修学分</div>
-                                <div class="col-1">已获学分</div>
-                                <div class="col-1">未获学分</div>
-                                <div class="col-5">完成度</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-1">公必</div>
-                                <div class="col-2">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-5">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="60"
-                                             aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-                                            <span class="sr-only">40% 完成</span>
+                            <table class="table table-hover" style="text-align: center;">
+                                <thead>
+                                <tr>
+                                    <th scope="col" style="width:10%;">类型</th>
+                                    <th scope="col" style="width:10%;">平均学分绩点</th>
+                                    <th scope="col" style="width:10%;">应修学分</th>
+                                    <th scope="col" style="width:10%;">已修学分</th>
+                                    <th scope="col" style="width:10%;">已获学分</th>
+                                    <th scope="col" style="width:10%;">未获学分</th>
+                                    <th scope="col" style="width:20%;">完成度</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">公必</th>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>
+                                        <div class="progress" style="height: 20px;">
+                                            <div class="progress-bar progress-bar-striped" role="progressbar"
+                                                 aria-valuenow="60"
+                                                 aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+                                                40% 完成
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-1">专必</div>
-                                <div class="col-2">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-5">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="60"
-                                             aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-                                            <span class="sr-only">40% 完成</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">专必</th>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>
+                                        <div class="progress" style="height: 20px;">
+                                            <div class="progress-bar progress-bar-striped" role="progressbar"
+                                                 aria-valuenow="60"
+                                                 aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+                                                40% 完成
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-1">公选</div>
-                                <div class="col-2">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-5">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="60"
-                                             aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-                                            <span class="sr-only">40% 完成</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">公选</th>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>
+                                        <div class="progress" style="height: 20px;">
+                                            <div class="progress-bar progress-bar-striped" role="progressbar"
+                                                 aria-valuenow="60"
+                                                 aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+                                                40% 完成
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-1">专选</div>
-                                <div class="col-2">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-5">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="60"
-                                             aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-                                            <span class="sr-only">40% 完成</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">专选</th>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>
+                                        <div class="progress" style="height: 20px;">
+                                            <div class="progress-bar progress-bar-striped" role="progressbar"
+                                                 aria-valuenow="60"
+                                                 aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+                                                40% 完成
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-1">总览</div>
-                                <div class="col-2">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-1">0</div>
-                                <div class="col-5">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="60"
-                                             aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-                                            <span class="sr-only">40% 完成</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">总览</th>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>
+                                        <div class="progress" style="height: 20px;">
+                                            <div class="progress-bar progress-bar-striped" role="progressbar"
+                                                 aria-valuenow="60"
+                                                 aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+                                                40% 完成
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
 
                     </div>
                     <!-- 可视化 -->
                     <div class="row">
                         <div class="col-lg-6">
+                            <!-- 线图 -->
                             <div class="line-chart-example card">
                                 <div class="card-close">
                                     <div class="dropdown">
@@ -343,7 +355,7 @@
                                     </div>
                                 </div>
                                 <div class="card-header d-flex align-items-center">
-                                    <h3 class="h4">Line Chart Example</h3>
+                                    <h3 class="h4">各学期绩点走势</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="chartjs-size-monitor"
@@ -357,13 +369,14 @@
                                             <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                         </div>
                                     </div>
-                                    <canvas id="lineChartExample" width="642" height="321"
+                                    <canvas id="testLine" width="642" height="321"
                                             class="chartjs-render-monitor"
                                             style="display: block; width: 642px; height: 321px;"></canvas>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
+                            <!-- 饼图 -->
                             <div class="pie-chart-example card">
                                 <div class="card-close">
                                     <div class="dropdown">
@@ -381,7 +394,7 @@
                                     </div>
                                 </div>
                                 <div class="card-header d-flex align-items-center">
-                                    <h3 class="h4">Doughnut Chart Example</h3>
+                                    <h3 class="h4">大学成绩分布图</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="chartjs-size-monitor"

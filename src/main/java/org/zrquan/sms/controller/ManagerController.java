@@ -3,10 +3,7 @@ package org.zrquan.sms.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.zrquan.sms.entity.*;
 import org.zrquan.sms.service.CommonServiceImpl;
 import org.zrquan.sms.service.ManagerServiceImpl;
@@ -102,27 +99,34 @@ public class ManagerController {
 
 	/**
 	 * 查询功能
+	 *
+	 * @param key     查询对象（课程、用户等）
+	 * @param value   查询条件（名字、类型等）
+	 * @param content 检索词
+	 * @return Json
 	 */
-	@RequestMapping(value = "search/{key}/{value}")
-	public String search(Model model,
-						 @PathVariable String key,
+	@RequestMapping(value = "search/{key}/{value}", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String search(@PathVariable String key,
 						 @PathVariable String value,
 						 @RequestParam String content) {
 
+		String result = "";
 		if (key.equals("course")) {
-			String result = managerService.searchCourse(value, content);
-			return "manager/managerCourse";
-		} else if (key.equals("user")) {
-			String result = managerService.searchUser(value, content);
-			return "manager/managerUser";
-		} else
-			return "manager/managerProfile";
+			result = managerService.searchCourse(value, content);
+		}
+		if (key.equals("user")) {
+			result = managerService.searchUser(value, content);
+		}
+
+		return result;
 	}
 
 	/**
 	 * 增加课程
 	 */
 	@RequestMapping("add/course")
+
 	public String addCourse(Model model,
 							@ModelAttribute Course course,
 							@RequestParam String teacherName) {
