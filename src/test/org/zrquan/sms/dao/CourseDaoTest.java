@@ -1,5 +1,6 @@
 package org.zrquan.sms.dao;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.zrquan.sms.BaseTest;
@@ -18,6 +19,12 @@ public class CourseDaoTest extends BaseTest {
 		List<Course> list = courseDao.retrieveCourse();
 
 		System.out.println(list.toString());
+	}
+
+	@Test
+	public void testSearchByCondition() {
+		List<Course> courses = courseDao.searchByCondition("teacher", "聂卉");
+		Assert.assertFalse(courses.isEmpty());
 	}
 
 	@Test

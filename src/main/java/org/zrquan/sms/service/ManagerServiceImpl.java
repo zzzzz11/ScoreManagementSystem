@@ -65,12 +65,16 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public String searchCourse(String condition, String keyword) {
-		return null;
+		List<Course> courses = courseDao.searchByCondition(condition, keyword);
+		String result = JSON.toJSONString(courses, SerializerFeature.DisableCircularReferenceDetect);
+		return result;
 	}
 
 	@Override
 	public String searchUser(String condition, String keyword) {
-		return null;
+		List<User> users = userDao.searchByCondition(condition, keyword);
+		String result = JSON.toJSONString(users, SerializerFeature.DisableCircularReferenceDetect);
+		return result;
 	}
 
 	@Override
