@@ -23,8 +23,8 @@
                                             </button>
                                             <div class="dropdown-menu" x-placement="bottom-start"
                                                  style="position: absolute; will-change: transform; top: 0; left: 0; transform: translate3d(0px, 38px, 0px);">
-                                                <button onclick="searchTeacher()" class="dropdown-item">教师</button>
-                                                <button onclick="searchType()" class="dropdown-item">类型</button>
+                                                <button onclick="search(this)" class="dropdown-item">教师</button>
+                                                <button onclick="search(this)" class="dropdown-item">类型</button>
                                                 <div class="dropdown-divider"></div>
                                                 <button onclick="void(0)" class="dropdown-item">模糊</button>
                                             </div>
@@ -133,12 +133,24 @@
     </section>
 
     <script>
-        function searchTeacher() {
-            $("#search").attr("action", "${ctx}/managerInfo/search/course/teacher").submit();
+        function search(option) {
+            let params = {};
+            params.content = $("#search input").val();
+            let condition = option.getAttribute("data-value");
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "${ctx}/manager/search/user/" + condition,
+                data: params,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
         }
 
-        function searchType() {
-            $("#search").attr("action", "${ctx}/managerInfo/search/course/type").submit();
-        }
     </script>
 </@manager>

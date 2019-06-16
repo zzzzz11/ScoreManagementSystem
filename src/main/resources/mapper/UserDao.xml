@@ -45,4 +45,18 @@
         from user;
     </select>
 
+    <select id="searchByCondition" resultMap="UserResultMap">
+        <bind name="pattern" value="'%' + keyword + '%'"/>
+        select *
+        from user where
+        <choose>
+            <when test="condition == 'name'">
+                user_name like #{pattern}
+            </when>
+            <when test="condition == 'type'">
+                user_type = #{keyword}
+            </when>
+        </choose>
+    </select>
+
 </mapper>

@@ -18,86 +18,9 @@ $(document).ready(function () {
 
 
     // ------------------------------------------------------- //
-    // Line Chart
-    // ------------------------------------------------------ //
-    var LINECHARTEXMPLE   = $('#lineChartExample');
-    var lineChartExample = new Chart(LINECHARTEXMPLE, {
-        type: 'line',
-        options: {
-            legend: {labels:{fontColor:"#777", fontSize: 12}},
-            scales: {
-                xAxes: [{
-                    display: true,
-                    gridLines: {
-                        color: '#eee'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    gridLines: {
-                        color: '#eee'
-                    }
-                }]
-            },
-        },
-        data: {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-                {
-                    label: "Data Set One",
-                    fill: true,
-                    lineTension: 0.3,
-                    backgroundColor: gradient1,
-                    borderColor: gradient1,
-                    borderCapStyle: 'butt',
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    borderJoinStyle: 'miter',
-                    borderWidth: 1,
-                    pointBorderColor: gradient1,
-                    pointBackgroundColor: "#fff",
-                    pointBorderWidth: 1,
-                    pointHoverRadius: 5,
-                    pointHoverBackgroundColor: gradient1,
-                    pointHoverBorderColor: "rgba(220,220,220,1)",
-                    pointHoverBorderWidth: 2,
-                    pointRadius: 1,
-                    pointHitRadius: 10,
-                    data: [30, 50, 40, 61, 42, 35, 40],
-                    spanGaps: false
-                },
-                {
-                    label: "Data Set Two",
-                    fill: true,
-                    lineTension: 0.3,
-                    backgroundColor: gradient2,
-                    borderColor: gradient2,
-                    borderCapStyle: 'butt',
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    borderJoinStyle: 'miter',
-                    borderWidth: 1,
-                    pointBorderColor: gradient2,
-                    pointBackgroundColor: "#fff",
-                    pointBorderWidth: 1,
-                    pointHoverRadius: 5,
-                    pointHoverBackgroundColor: gradient2,
-                    pointHoverBorderColor: "rgba(220,220,220,1)",
-                    pointHoverBorderWidth: 2,
-                    pointRadius: 1,
-                    pointHitRadius: 10,
-                    data: [50, 40, 50, 40, 45, 40, 30],
-                    spanGaps: false
-                }
-            ]
-        }
-    });
-
-
-    // ------------------------------------------------------- //
     // Doughnut Chart
     // ------------------------------------------------------ //
-    var DOUGHNUTCHARTEXMPLE  = $('#doughnutChartExample');
+    var DOUGHNUTCHARTEXMPLE = $('#doughnutChartExample');
     var pieChartExample = new Chart(DOUGHNUTCHARTEXMPLE, {
         type: 'doughnut',
         options: {
@@ -127,7 +50,7 @@ $(document).ready(function () {
                         "#71e9ad"
                     ]
                 }]
-            }
+        }
     });
 
     var pieChartExample = {
@@ -261,7 +184,7 @@ $(document).ready(function () {
     // ------------------------------------------------------- //
     // Pie Chart
     // ------------------------------------------------------ //
-    var PIECHARTEXMPLE    = $('#pieChartExample');
+    var PIECHARTEXMPLE = $('#pieChartExample');
     var pieChartExample = new Chart(PIECHARTEXMPLE, {
         type: 'pie',
         data: {
@@ -288,7 +211,7 @@ $(document).ready(function () {
                         "#96e5ff"
                     ]
                 }]
-            }
+        }
     });
 
     var pieChartExample = {
@@ -299,7 +222,7 @@ $(document).ready(function () {
     // ------------------------------------------------------- //
     // Bar Chart
     // ------------------------------------------------------ //
-    var BARCHARTEXMPLE    = $('#barChartExample');
+    var BARCHARTEXMPLE = $('#barChartExample');
     var barChartExample = new Chart(BARCHARTEXMPLE, {
         type: 'bar',
         options: {
@@ -390,7 +313,6 @@ $(document).ready(function () {
     });
 
 
-
     // ------------------------------------------------------- //
     // Bar Chart 1
     // ------------------------------------------------------ //
@@ -398,20 +320,20 @@ $(document).ready(function () {
     var barChartHome = new Chart(BARCHART1, {
         type: 'bar',
         options:
-        {
-            scales:
             {
-                xAxes: [{
+                scales:
+                    {
+                        xAxes: [{
+                            display: false
+                        }],
+                        yAxes: [{
+                            display: false
+                        }],
+                    },
+                legend: {
                     display: false
-                }],
-                yAxes: [{
-                    display: false
-                }],
+                }
             },
-            legend: {
-                display: false
-            }
-        },
         data: {
             labels: ["A", "B", "C", "D", "E", "F", "G", "H"],
             datasets: [
@@ -477,20 +399,20 @@ $(document).ready(function () {
     var barChartHome = new Chart(BARCHART2, {
         type: 'bar',
         options:
-        {
-            scales:
             {
-                xAxes: [{
+                scales:
+                    {
+                        xAxes: [{
+                            display: false
+                        }],
+                        yAxes: [{
+                            display: false
+                        }],
+                    },
+                legend: {
                     display: false
-                }],
-                yAxes: [{
-                    display: false
-                }],
+                }
             },
-            legend: {
-                display: false
-            }
-        },
         data: {
             labels: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"],
             datasets: [
@@ -541,7 +463,7 @@ $(document).ready(function () {
     // ------------------------------------------------------- //
     // Polar Chart
     // ------------------------------------------------------ //
-    var POLARCHARTEXMPLE  = $('#polarChartExample');
+    var POLARCHARTEXMPLE = $('#polarChartExample');
     var polarChartExample = new Chart(POLARCHARTEXMPLE, {
         type: 'polarArea',
         options: {
@@ -588,7 +510,7 @@ $(document).ready(function () {
     // ------------------------------------------------------- //
     // Radar Chart
     // ------------------------------------------------------ //
-    var RADARCHARTEXMPLE  = $('#radarChartExample');
+    var RADARCHARTEXMPLE = $('#radarChartExample');
     var radarChartExample = new Chart(RADARCHARTEXMPLE, {
         type: 'radar',
         data: {
@@ -622,7 +544,6 @@ $(document).ready(function () {
     var radarChartExample = {
         responsive: true
     };
-
 
 
 });
