@@ -59,19 +59,19 @@
 
                         <div class="ml-lg-4">
                             <div class="list-inline-item">
-                                <input id="checkboxCustom1" type="checkbox" value="" class="checkbox-template">
+                                <input id="checkboxCustom1" type="checkbox" value="专必" class="checkbox-template">
                                 <label for="checkboxCustom1">专必</label>
                             </div>
                             <div class="list-inline-item">
-                                <input id="checkboxCustom2" type="checkbox" value="" class="checkbox-template">
+                                <input id="checkboxCustom2" type="checkbox" value="公必" class="checkbox-template">
                                 <label for="checkboxCustom2">公必</label>
                             </div>
                             <div class="list-inline-item">
-                                <input id="checkboxCustom3" type="checkbox" value="" class="checkbox-template">
+                                <input id="checkboxCustom3" type="checkbox" value="专选" class="checkbox-template">
                                 <label for="checkboxCustom3">专选</label>
                             </div>
                             <div class="list-inline-item">
-                                <input id="checkboxCustom4" type="checkbox" value="" class="checkbox-template">
+                                <input id="checkboxCustom4" type="checkbox" value="公选" class="checkbox-template">
                                 <label for="checkboxCustom4">公选</label>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                                         <th></th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="result">
                                     <#list json as record>
                                         <tr>
                                             <td>${record.id}</td>
@@ -108,22 +108,44 @@
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-primary"
-                                                        data-toggle="modal" data-target="#inputmodal"
-                                                        data-backdrop="false">导入成绩
+                                                        data-toggle="modal" data-target="#inputModal">导入成绩
                                                 </button>
-                                                <div class="modal" id="inputmodal">
+                                                <div class="modal fade text-left" id="inputModal" tabindex="-1"
+                                                     role="dialog"
+                                                     aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                                     data-backdrop="static">
 
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                成绩上传界面
+                                                                <h4 id="exampleModalLabel" class="modal-title">
+                                                                    成绩上传界面</h4>
+                                                                <button type="button" data-dismiss="modal"
+                                                                        aria-label="Close" class="close"><span
+                                                                            aria-hidden="true">×</span></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <button class="btn-primary">
-                                                                    <input type="file" accept=".xlsx, .xls">
+
+                                                                <div class="file-container"
+                                                                     style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+                                                                    <button class="btn btn-primary fileinput-button"
+                                                                            type="button">上传文件
+                                                                    </button>
+                                                                    <input type="file" id="jobData"
+                                                                           accept=".xls,.xlsx"
+                                                                           onchange="loadFile(this.files[0])"
+                                                                           style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+                                                                    <span id="filename" style="vertical-align: middle">未上传文件</span>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-secondary" data-dismiss="modal"
+                                                                        type="button">关闭
                                                                 </button>
                                                             </div>
                                                         </div>
+
                                                     </div>
 
                                                 </div>

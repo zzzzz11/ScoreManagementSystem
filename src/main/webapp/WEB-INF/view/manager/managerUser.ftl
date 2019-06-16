@@ -11,6 +11,28 @@
                 <div class="col-lg-8 offset-2">
                     <div class="card">
                         <div class="card-body">
+
+                            <#--判断添加状态-->
+                            <#if message??>
+                                <#if message=="添加成功！">
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                         style="width: fit-content">
+                                        <strong>${message}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                <#elseif message=="添加失败，务必先完善教师信息。">
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                         style="width: fit-content">
+                                        <strong>${message}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </#if>
+                            </#if>
+
                             <div class="row">
                                 <!-- 查询功能 -->
                                 <div class="col-sm-7">
@@ -228,7 +250,7 @@
                             </div>
                             <!-- 表格 -->
                             <div class="table-responsive">
-                                <table class="table table-striped table-hover">
+                                <table id="main" class="table table-striped table-hover">
                                     <thead>
                                     <tr>
                                         <th>账号</th>
@@ -239,7 +261,7 @@
                                         <th>创建时间</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="result">
                                     <#-- 变量声明 -->
                                     <#if users??>
                                         <#assign users_text>${users}</#assign>
@@ -285,6 +307,24 @@
                 data: params,
                 dataType: "json",
                 success: function (data) {
+                    $("#result tr").remove();// 删除ID=“result”标签的字标签tr下所有内容
+
+                    // 以下代码为循环布局
+                    for (let i in data) {
+                        let date = new Date(data[i].createTime);
+                        const trtd = "<td>" + data[i].accountNumber + "</td><td>" // 添加复选框
+                            + data[i].userName + "</td><td>"  // 添加标号
+                            + data[i].userType + "</td><td>"  // 类型名
+                            + "" + "</td><td>"  // 商品名
+                            + "" + "</td><td>"  // 商品价格
+                            + date.getFullYear() + "-"
+                            + (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1)
+                            + "-" + (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + "  "
+                            + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+                            + "</td>"; // 商品折后价
+                        // 将以上标签动态添加到tbody中进行展示
+                        $("#main tbody").append("<tr>" + trtd + "</tr>");
+                    }
                     console.log(data);
                 },
                 error: function (data) {
