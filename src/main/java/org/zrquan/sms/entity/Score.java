@@ -14,6 +14,9 @@ public class Score {
 	@JSONField(name = "value")
 	private double value;
 
+	@JSONField(name = "gpa")
+	private double gpa;
+
 	@JSONField(name = "identity")
 	private int identity;  // 重考标识，0为不需要重考
 
@@ -55,5 +58,13 @@ public class Score {
 
 	public void setIdentity(int identity) {
 		this.identity = identity;
+	}
+
+	public double getGpa() {
+		return gpa;
+	}
+
+	public void setGpa(double gpa) {
+		this.gpa = gpa;
 	}
 }

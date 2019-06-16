@@ -20,5 +20,4 @@ public interface StudentService {
 	 * @return JSON字符串
 	 */
 	String getScoreInfo(String number);
-
 }

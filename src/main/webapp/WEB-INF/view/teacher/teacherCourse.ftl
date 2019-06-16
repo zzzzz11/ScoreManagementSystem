@@ -28,54 +28,51 @@
                             <h3 class="h4">Score table</h3>
                         </div>
 
-                        <div class="form-inline" style="margin-left:30px;margin-top:20px;">
-                            <div class="form-inline" style="margin-right:30px;">
-                                <label for="" size="20">培养方案:&#160;&#160;&#160;&#160;</label>
-                                <select class="form-control" name="" id="">
+                        <form class="form-inline ml-lg-4" style="margin-top:20px;">
+                            <div class="form-group" style="margin-right:30px;">
+                                <label>培养方案:&#160;&#160;&#160;&#160;</label>
+                                <select class="form-control" name="">
                                     <option>主修</option>
                                     <option>辅修</option>
                                     <option>双学位</option>
                                 </select>
                             </div>
 
-                            <div class="form-inline" style="margin-right:30px;">
-                                <label for="">学年:&#160;&#160;&#160;&#160;</label>
-                                <select class="form-control" name="" id="">
+                            <div class="form-group" style="margin-right:30px;">
+                                <label>学年:&#160;&#160;&#160;&#160;</label>
+                                <select class="form-control" name="">
                                     <option>2018-2019</option>
                                     <option>2017-2018</option>
                                     <option>2016-2017</option>
                                 </select>
                             </div>
 
-                            <div class="form-inline" style="margin-right:30px;">
-                                <label for="">学期:&#160;&#160;&#160;&#160;</label>
-                                <select class="form-control" name="" id="">
+                            <div class="form-group" style="margin-right:30px;">
+                                <label>学期:&#160;&#160;&#160;&#160;</label>
+                                <select class="form-control" name="">
                                     <option>第一学期</option>
                                     <option>第二学期</option>
                                 </select>
                             </div>
+                            <button type="submit" class="btn btn-primary">查询</button>
+                        </form>
 
-                            <button type="button" class="btn btn-primary">查询</button>
-                        </div>
-
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="" id=""
-                                           value="option1"> 公必
-                                </label>
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="" id=""
-                                           value="option2"> 专必
-                                </label>
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="" id=""
-                                           value="option3"> 专选
-                                </label>
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="" id=""
-                                           value="option4"> 公选
-                                </label>
+                        <div class="ml-lg-4">
+                            <div class="list-inline-item">
+                                <input id="checkboxCustom1" type="checkbox" value="" class="checkbox-template">
+                                <label for="checkboxCustom1">专必</label>
+                            </div>
+                            <div class="list-inline-item">
+                                <input id="checkboxCustom2" type="checkbox" value="" class="checkbox-template">
+                                <label for="checkboxCustom2">公必</label>
+                            </div>
+                            <div class="list-inline-item">
+                                <input id="checkboxCustom3" type="checkbox" value="" class="checkbox-template">
+                                <label for="checkboxCustom3">专选</label>
+                            </div>
+                            <div class="list-inline-item">
+                                <input id="checkboxCustom4" type="checkbox" value="" class="checkbox-template">
+                                <label for="checkboxCustom4">公选</label>
                             </div>
                         </div>
 
@@ -111,7 +108,9 @@
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-primary"
-                                                        data-toggle="modal" data-target="#inputmodal" data-backdrop="false">导入成绩</button>
+                                                        data-toggle="modal" data-target="#inputmodal"
+                                                        data-backdrop="false">导入成绩
+                                                </button>
                                                 <div class="modal" id="inputmodal">
 
                                                     <div class="modal-dialog">

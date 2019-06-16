@@ -12,4 +12,9 @@
         where id = #{id}
     </select>
 
+    <select id="retrieveDept" resultMap="DepartmentResultMap">
+        select *
+        from department
+    </select>
+
 </mapper>

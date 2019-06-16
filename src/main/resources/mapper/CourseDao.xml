@@ -17,10 +17,26 @@
                      select="org.zrquan.sms.dao.TeacherDao.getTeacherById"/>
     </resultMap>
 
+    <insert id="create" parameterType="Course" useGeneratedKeys="true" keyProperty="id">
+        insert into course(course_name, credit, type, period, teacher_id)
+        values (#{course.name}, #{course.credit}, #{course.type}, #{course.period}, #{course.teacher.id})
+    </insert>
+
+    <delete id="deleteById">
+        delete
+        from course
+        where id = #{id}
+    </delete>
+
     <select id="getCourseById" resultMap="CourseResultMap">
         select *
         from course
         where id = #{id}
+    </select>
+
+    <select id="retrieveCourse" resultMap="CourseResultMap">
+        select *
+        from course
     </select>
 
     <select id="getCourseByTeacherNumber" resultMap="CourseResultMap">
@@ -29,8 +45,7 @@
         where teacher_id = (
             select id
             from teacher
-            where tnumber=#{tNumber}
+            where tnumber = #{tNumber}
         )
     </select>
-
 </mapper>

@@ -6,18 +6,43 @@
         <result column="account_number" jdbcType="VARCHAR" property="accountNumber"/>
         <result column="user_name" jdbcType="VARCHAR" property="userName"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
-        <result column="user_type" jdbcType="CHAR" property="userType"/>
+        <result column="user_type" jdbcType="VARCHAR" property="userType"/>
+        <result column="mail" jdbcType="VARCHAR" property="email"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="created_time" javaType="java.util.Date" jdbcType="TIMESTAMP" property="createTime"/>
     </resultMap>
 
-    <insert id="addUser" parameterType="User" useGeneratedKeys="true">
-        insert into user (account_number, user_name, password, user_type)
-        values (#{accountNumber}, #{userName}, md5(#{password}), #{userType})
+    <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            account_number, user_name, password, user_type,
+            <if test='user.email != null and user.email != ""'>
+                mail,
+            </if>
+            <if test='user.phone != null and user.phone != ""'>
+                phone,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{user.accountNumber}, #{user.userName}, #{user.password}, #{user.userType},
+            <if test='user.email != null and user.email != ""'>
+                #{user.email},
+            </if>
+            <if test='user.phone != null and user.phone != ""'>
+                #{user.phone},
+            </if>
+        </trim>
     </insert>
 
     <select id="getUserByAccountNumber" resultMap="UserResultMap">
         select *
         from user
         where account_number = #{accountNumber}
+    </select>
+
+    <select id="retrieveUser" resultMap="UserResultMap">
+        select *
+        from user;
     </select>
 
 </mapper>
