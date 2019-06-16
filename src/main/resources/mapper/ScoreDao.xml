@@ -26,15 +26,21 @@
     <select id="getScoreByTeacherNumber" resultMap="ScoreResultMap">
         select *
         from score
-        where course_id=(
+        where course_id = (
             select id
             from course
-            where teacher_id=(
+            where teacher_id = (
                 select id
                 from teacher
-                where tnumber=#{teacherNumber}
+                where tnumber = #{teacherNumber}
+            )
         )
-        )
+    </select>
+
+    <select id="getCourseStudentCount" resultType="java.lang.Integer">
+        select COUNT(student_id)
+        from score
+        where course_id = #{courseId}
     </select>
 
 </mapper>

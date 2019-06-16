@@ -17,6 +17,9 @@ public class Score {
 	@JSONField(name = "gpa")
 	private double gpa;
 
+	@JSONField(name = "crank")
+	private int crank;
+
 	@JSONField(name = "identity")
 	private int identity;  // 重考标识，0为不需要重考
 
@@ -66,5 +69,13 @@ public class Score {
 
 	public void setGpa(double gpa) {
 		this.gpa = gpa;
+	}
+
+	public int getCrank() {
+		return crank;
+	}
+
+	public void setCrank(int crank) {
+		this.crank = crank;
 	}
 }

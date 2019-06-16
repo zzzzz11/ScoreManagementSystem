@@ -13,4 +13,6 @@ public interface StudentDao {
 	int create(@Param("student") Student student);
 
 	List<Student> retrieveStudent();
+
+	Double getCourseScore(@Param("courseId") int courseId, @Param("studentId") int studentId);
 }

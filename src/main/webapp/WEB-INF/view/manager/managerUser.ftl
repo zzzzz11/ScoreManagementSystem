@@ -308,7 +308,6 @@
                 dataType: "json",
                 success: function (data) {
                     $("#result tr").remove();// 删除ID=“result”标签的字标签tr下所有内容
-
                     // 以下代码为循环布局
                     for (let i in data) {
                         let date = new Date(data[i].createTime);

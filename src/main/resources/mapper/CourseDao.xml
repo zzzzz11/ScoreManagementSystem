@@ -9,7 +9,7 @@
         <result column="period" jdbcType="INTEGER" property="period"/>
         <result column="average" jdbcType="DOUBLE" property="average"/>
         <result column="normal_distribution" jdbcType="VARCHAR" property="normalDistribution"/>
-        <result column="test_form" jdbcType="VARCHAR" property="test_form"/>
+        <result column="test_form" jdbcType="VARCHAR" property="testForm"/>
         <result column="term" jdbcType="VARCHAR" property="term"/>
         <result column="year" jdbcType="VARCHAR" property="year"/>
         <association property="teacher"
@@ -68,5 +68,12 @@
                 course_name like #{pattern}
             </when>
         </choose>
+    </select>
+
+    <select id="getValueList" resultType="java.lang.Double">
+        select value
+        from score
+        where course_id = #{courseId}
+        order by value asc
     </select>
 </mapper>

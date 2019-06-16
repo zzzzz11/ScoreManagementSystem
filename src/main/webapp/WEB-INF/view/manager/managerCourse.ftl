@@ -123,7 +123,7 @@
 
                         <!-- 表格 -->
                         <div class="table-responsive">
-                            <table id="main" class="table table-striped table-hover" >
+                            <table id="main" class="table table-striped table-hover">
                                 <thead>
                                 <tr>
                                     <th>名称</th>
@@ -170,14 +170,13 @@
                 dataType: "json",
                 success: function (data) {
                     $("#result tr").remove();// 删除ID=“result”标签的字标签tr下所有内容
-
                     // 以下代码为循环布局
                     for (let i in data) {
                         const trtd = "<td>" + data[i].name + "</td><td>"
                             + data[i].teacher.name + "</td><td>"
                             + data[i].type + "</td><td>"
                             + data[i].credit + "</td><td>"  // 商品名
-                            + data[i].period+ "</td><td>"  // 商品价格
+                            + data[i].period + "</td><td>"  // 商品价格
                             + "</td>"; // 商品折后价
                         // 将以上标签动态添加到tbody中进行展示
                         $("#main tbody").append("<tr>" + trtd + "</tr>");
@@ -189,6 +188,5 @@
                 }
             });
         }
-
     </script>
 </@manager>

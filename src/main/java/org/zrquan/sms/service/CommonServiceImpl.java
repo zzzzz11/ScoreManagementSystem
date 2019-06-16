@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zrquan.sms.dao.DepartmentDao;
 import org.zrquan.sms.dao.MajorDao;
+import org.zrquan.sms.dao.ScoreDao;
+import org.zrquan.sms.dao.TempScoreDao;
 import org.zrquan.sms.entity.Department;
 import org.zrquan.sms.entity.Major;
 import org.zrquan.sms.service.interfaces.CommonService;
@@ -18,6 +20,10 @@ public class CommonServiceImpl implements CommonService {
 	DepartmentDao departmentDao;
 	@Autowired
 	MajorDao majorDao;
+	@Autowired
+	ScoreDao scoreDao;
+	@Autowired
+	TempScoreDao tempScoreDao;
 
 	@Override
 	public String retrieveDept() {
@@ -33,5 +39,10 @@ public class CommonServiceImpl implements CommonService {
 		String result = JSON.toJSONString(majors, SerializerFeature.DisableCircularReferenceDetect);
 
 		return result;
+	}
+
+	@Override
+	public int getCourseStudentCount(int courseId) {
+		return scoreDao.getCourseStudentCount(courseId) + tempScoreDao.getCourseStudentCount(courseId);
 	}
 }
