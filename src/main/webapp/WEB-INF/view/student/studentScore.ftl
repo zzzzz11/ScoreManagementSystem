@@ -1,5 +1,5 @@
 <#include "studentMacro.ftl">
-<@student keywords="学生成绩" js=["js/charts-custom.js", "js/mycharts.js"]>
+<@student keywords="学生成绩" js=["js/mycharts.js"]>
 
     <!-- 模块标题 -->
     <header class="page-header">
@@ -13,7 +13,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-
                     <!-- 课程成绩 -->
                     <div class="card">
                         <div class="card-close">
@@ -24,6 +23,9 @@
                                 <div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow">
                                     <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a>
                                     <a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a>
+                                    <a href="javascript:void(0)" class="dropdown-item edit" onclick="exportExcel()"><i
+                                                class="fa fa-gear"></i>export
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -31,52 +33,63 @@
                             <h3 class="h4">成绩查询</h3>
                         </div>
 
-                        <!-- 查询表单 -->
-                        <form class="form-inline" method="post" action="" style="margin-left:30px;margin-top:20px;">
-                            <div class="form-inline" style="margin-right:30px;">
-                                <label for="" size="20">培养方案:&#160;&#160;&#160;&#160;</label>
-                                <select class="form-control" name="" id="">
-                                    <option>主修</option>
-                                    <option>辅修</option>
-                                    <option>双学位</option>
-                                </select>
-                            </div>
-
-                            <div class="form-inline" style="margin-right:30px;">
-                                <label for="" size="20">课程类型:&#160;&#160;&#160;&#160;</label>
-                                <select class="form-control" name="" id="">
-                                    <option>专必</option>
-                                    <option>公必</option>
-                                    <option>专选</option>
-                                    <option>公选</option>
-                                </select>
-                            </div>
-
-                            <div class="form-inline" style="margin-right:30px;">
-                                <label for="">学年:&#160;&#160;&#160;&#160;</label>
-                                <select class="form-control" name="" id="">
-                                    <option>2018-2019</option>
-                                    <option>2017-2018</option>
-                                    <option>2016-2017</option>
-                                </select>
-                            </div>
-
-                            <div class="form-inline" style="margin-right:30px;">
-                                <label for="">学期:&#160;&#160;&#160;&#160;</label>
-                                <select class="form-control" name="" id="">
-                                    <option>第一学期</option>
-                                    <option>第二学期</option>
-                                </select>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">查询</button>
-                        </form>
-
                         <div class="card-body">
+                            <!-- 查询表单 -->
+                            <div class="d-inline-flex">
+                                <form class="form-inline">
+                                    <div class="form-group mr-3">
+                                        <label>培养方案：</label>
+                                        <select class="form-control" name="">
+                                            <option>主修</option>
+                                            <option>辅修</option>
+                                            <option>双学位</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group mr-3">
+                                        <label>学年：</label>
+                                        <select class="form-control" name="">
+                                            <option>2018-2019</option>
+                                            <option>2017-2018</option>
+                                            <option>2016-2017</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group mr-3">
+                                        <label>学期：</label>
+                                        <select class="form-control" name="">
+                                            <option>第一学期</option>
+                                            <option>第二学期</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">查询</button>
+                                </form>
+                            </div>
+                            <div class="d-inline-flex ml-5">
+                                <div class="mb-3">
+                                    <div class="list-inline-item">
+                                        <input id="checkboxCustom1" type="checkbox" value="" class="checkbox-template">
+                                        <label for="checkboxCustom1">专必</label>
+                                    </div>
+                                    <div class="list-inline-item">
+                                        <input id="checkboxCustom2" type="checkbox" value="" class="checkbox-template">
+                                        <label for="checkboxCustom2">公必</label>
+                                    </div>
+                                    <div class="list-inline-item">
+                                        <input id="checkboxCustom3" type="checkbox" value="" class="checkbox-template">
+                                        <label for="checkboxCustom3">专选</label>
+                                    </div>
+                                    <div class="list-inline-item">
+                                        <input id="checkboxCustom4" type="checkbox" value="" class="checkbox-template">
+                                        <label for="checkboxCustom4">公选</label>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="table-responsive">
                                 <#assign text>${score}</#assign>
                                 <#assign json=text?eval />
-                                <table class="table table-striped table-hover">
+                                <table id="table" class="table table-striped table-hover">
                                     <thead>
                                     <tr>
                                         <th>课程</th>
@@ -91,7 +104,7 @@
                                         <th>是否通过</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="tbody">
                                     <#list json as record>
                                         <tr>
                                             <td>${record.course.name}</td>
@@ -100,7 +113,7 @@
                                             <td>${record.value}</td>
                                             <#assign credit>${record.value/20}</#assign>
                                             <td>${credit}</td>
-                                            <td></td>
+                                            <td>${record.crank} / ${record.course.studentCount!""}</td>
                                             <td>${record.course.year} - ${record.course.year?eval + 1}</td>
                                             <td>${record.course.term!""}</td>
                                             <td>${record.course.testForm!""}</td>
@@ -118,6 +131,9 @@
                                     </#list>
                                     </tbody>
                                 </table>
+                                <div>
+                                    <ul class="pagination" id="pagination" style="justify-content: center"></ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -369,7 +385,7 @@
                                             <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                         </div>
                                     </div>
-                                    <canvas id="testLine" width="642" height="321"
+                                    <canvas id="gpaTrend" width="642" height="321"
                                             class="chartjs-render-monitor"
                                             style="display: block; width: 642px; height: 321px;"></canvas>
                                 </div>
@@ -394,7 +410,7 @@
                                     </div>
                                 </div>
                                 <div class="card-header d-flex align-items-center">
-                                    <h3 class="h4">大学成绩分布图</h3>
+                                    <h3 class="h4">成绩分布</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="chartjs-size-monitor"
@@ -408,16 +424,135 @@
                                             <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                         </div>
                                     </div>
-                                    <canvas id="doughnutChartExample" width="350" height="340"
+                                    <canvas id="scoreDistribute" width="350" height="340"
                                             class="chartjs-render-monitor"
                                             style="display: block; width: 350px; height: 340px;"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        var page = 1;
+        //当前页，默认等于1
+        var pageSize = 10;
+        var json = ${text};
+        var jsonObj = eval(json);
+
+        function loadPagination() {
+            var s = "";
+            //用于分页标签嵌入
+            var minPage = 1;
+            //最小页码
+            var maxPage = 1;
+            //最大页码
+            var totalRecord = jsonObj.length;
+            var maxPage = Math.ceil(totalRecord / pageSize);
+            //加载上一页
+            s += "<li class='page-item'><a class='page-link' id='prePage'>&laquo;</a></li>";
+
+
+            //加载分页列表
+            for (var i = page - 4; i < page + 5; i++) {
+                //i代表列表的页数
+                if (i >= minPage && i <= maxPage) {
+                    if (i == page) {
+                        s += " <li class='page-item active'><a class='page-link'>" + i + "</a></li>"
+                    } else {
+                        s += " <li class='page-item'><a class='page-link'>" + i + "</a></li>";
+                    }
+                }
+            }
+            //加载下一页
+            s += "<li class='page-item'><a class='page-link' id='nextPage'>&raquo;</a></li>";
+            load();
+            $("#pagination").html(s);
+            //给列表加上点击事件
+            $(".page-item").click(function () {
+                //改变当前页数
+                //把点击的页数，扔给page（当前页）
+                page = $(this).text();
+                console.log("当前页数:"+page);
+                //page获取了当前页，重新加载以下方法
+                //调用load方法
+                load();
+                //把加载数据封装成一个方法
+                loadPagination();
+                //加载分页信息方法
+            })
+            //上一页点击事件
+            $("#prePage").click(function () {
+                //改变当前页
+                console.log("i was used");
+                if (page > 1) {
+                    //如果不是第一页
+                    page = parseInt(page) - 1;
+                }
+                //            page获取了当前页，重新加载以下方法
+                //调用load方法
+                loadPagination();
+                load();
+                //把加载数据封装成一个方法
+                //加载分页信息方法
+            })
+            //下一页点击事件
+            $("#nextPage").click(function () {
+                //alert(maxPage);
+                if (page < maxPage) {
+                    //如果不是最后一页
+                    page = parseInt(page) + 1;
+                }
+                //page获取了当前页，重新加载以下方法
+                //调用load方法
+                load();
+                //把加载数据封装成一个方法
+                loadPagination();
+                //加载分页信息方法
+            });
+        };
+        window.onload = loadPagination;
+
+        function load() {
+            //有page传进来
+            var str = "";
+            for(var i=(page-1)*pageSize;i<(page-1)*pageSize+pageSize;i++){
+                if(i<=jsonObj.length-1){
+                    let identity=jsonObj[i].identity;
+                    let isPassed="不及格";
+                    if(identity=0)
+                        isPassed="及格";
+                    let score=parseFloat(jsonObj[i].value);
+                    let credit=score/20;
+                    str=str+"<tr><td>"+jsonObj[i].course.name+"</td>"+"<td>"+jsonObj[i].course.type+"</td>"
+                        +"<td>"+jsonObj[i].course.teacher.name+"</td>"+"<td>"+jsonObj[i].value+"</td>"
+                        +"<td>"+credit+"</td>"+"<td></td>" +"<td>"+jsonObj[i].course.year+"</td>" +"<td>"+jsonObj[i].course.term+"</td>"
+                        +"<td></td>"+"<td>"+isPassed+"</td></tr>"
+                }
+            }
+            $("#tbody").html(str);
+        }
+
+        function exportExcel() {
+            $("#table").table2excel({
+                // 不被导出的表格行的CSS class类
+                exclude: ".noExl",
+                // 导出的Excel文档的名称
+                name: "Excel Document Name",
+                // Excel文件的名称
+                filename: "test",
+                //文件后缀名
+                fileext: ".xls",
+                //是否排除导出图片
+                exclude_img: false,
+                //是否排除导出超链接
+                exclude_links: false,
+                //是否排除导出输入框中的内容
+                exclude_inputs: false
+            })
+        }
+    </script>
 </@student>

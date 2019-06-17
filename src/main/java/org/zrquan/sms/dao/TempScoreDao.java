@@ -7,4 +7,6 @@ public interface TempScoreDao {
 	int addTempScore(@Param("score") Score score);
 
 	int deleteTempScore(@Param("score") Score score);
+
+	int getCourseStudentCount(@Param("courseId") int courseId);
 }

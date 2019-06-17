@@ -3,29 +3,34 @@ $(document).ready(function () {
     // ------------------------------------------------------- //
     // Charts Gradients
     // ------------------------------------------------------ //
-    var ctx1 = $("canvas").get(0).getContext("2d");
-    var gradient1 = ctx1.createLinearGradient(150, 0, 150, 300);
+    let ctx1 = $("canvas").get(0).getContext("2d");
+    let gradient1 = ctx1.createLinearGradient(150, 0, 150, 300);
     gradient1.addColorStop(0, 'rgba(133, 180, 242, 0.91)');
     gradient1.addColorStop(1, 'rgba(255, 119, 119, 0.94)');
 
-    var gradient2 = ctx1.createLinearGradient(146.000, 0.000, 154.000, 300.000);
+    let gradient2 = ctx1.createLinearGradient(146.000, 0.000, 154.000, 300.000);
     gradient2.addColorStop(0, 'rgba(104, 179, 112, 0.85)');
     gradient2.addColorStop(1, 'rgba(76, 162, 205, 0.85)');
 
     // ------------------------------------------------------- //
     // Line Chart
     // ------------------------------------------------------ //
-    var LINECHARTEXMPLE = $('#testLine');
-    var lineChartExample = new Chart(LINECHARTEXMPLE, {
+    let LINECHARTEXMPLE = $('#gpaTrend');
+    let lineChartExample = new Chart(LINECHARTEXMPLE, {
         type: 'line',
         options: {
             legend: {labels: {fontColor: "#777", fontSize: 12}},
             scales: {
                 xAxes: [{
+                    ticks:{
+                        autoSkip:false,
+                        minRotation:45
+                    },
                     display: true,
                     gridLines: {
                         color: '#eee'
-                    }
+                    },
+
                 }],
                 yAxes: [{
                     display: true,
@@ -36,10 +41,10 @@ $(document).ready(function () {
             },
         },
         data: {
-            labels: ["一月", "February", "March", "April", "May", "June", "July"],
+            labels: ["大一第1学期", "大一第2学期", "大二第1学期", "大二第2学期", "大三第1学期", "大三第2学期", "大四第1学期", "大四第2学期"],
             datasets: [
                 {
-                    label: "Data Set One",
+                    label: "所有成绩",
                     fill: true,
                     lineTension: 0.3,
                     backgroundColor: gradient1,
@@ -62,7 +67,7 @@ $(document).ready(function () {
                     spanGaps: false
                 },
                 {
-                    label: "Data Set Two",
+                    label: "去掉公选成绩",
                     fill: true,
                     lineTension: 0.3,
                     backgroundColor: gradient2,
@@ -91,18 +96,18 @@ $(document).ready(function () {
     // ------------------------------------------------------- //
     // Doughnut Chart
     // ------------------------------------------------------ //
-    var DOUGHNUTCHARTEXMPLE = $('#doughnutChartExample');
-    var pieChartExample = new Chart(DOUGHNUTCHARTEXMPLE, {
+    let DOUGHNUTCHARTEXMPLE = $('#scoreDistribute');
+    let pieChartExample = new Chart(DOUGHNUTCHARTEXMPLE, {
         type: 'doughnut',
         options: {
             cutoutPercentage: 70,
         },
         data: {
             labels: [
-                "A",
-                "B",
-                "C",
-                "D"
+                "公选",
+                "专选",
+                "公必",
+                "专必"
             ],
             datasets: [
                 {
@@ -124,9 +129,8 @@ $(document).ready(function () {
         }
     });
 
-    var pieChartExample = {
+    pieChartExample = {
         responsive: true
     };
 
-
-})
+});

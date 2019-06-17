@@ -10,7 +10,6 @@ import org.zrquan.sms.entity.User;
 import org.zrquan.sms.service.StudentServiceImpl;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequestMapping("student")
@@ -37,6 +36,7 @@ public class StudentController {
 	@RequestMapping(value = {"score", "main"})
 	public String getStudentScore(Model model,
 								  HttpSession session) {
+
 		User user = (User) session.getAttribute("user");
 		String number = user.getAccountNumber();
 		String scoreInfo = studentService.getScoreInfo(number);

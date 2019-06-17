@@ -36,7 +36,7 @@ CREATE TABLE `course`
     `teacher_id`    int(11)     NOT NULL COMMENT '任课老师',
     `year`          varchar(45)          DEFAULT NULL COMMENT '学年',
     `term`          varchar(45)          DEFAULT NULL COMMENT '学期（一或二）',
-    `test_form`     varchar(45)          DEFAULT NULL COMMENT '考试方式',
+    `testForm`      varchar(45)          DEFAULT NULL COMMENT '考试方式',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 14

@@ -35,4 +35,11 @@
         from student
     </select>
 
+    <select id="getCourseScore" resultType="java.lang.Double">
+        select value
+        from score
+        where course_id = #{courseId}
+          and student_id = #{studentId}
+    </select>
+
 </mapper>
