@@ -1,5 +1,5 @@
 <#include "studentMacro.ftl">
-<@student keywords="学生成绩" js=["js/charts-custom.js", "js/mycharts.js"]>
+<@student keywords="学生成绩" js=["js/mycharts.js"]>
 
     <!-- 模块标题 -->
     <header class="page-header">
@@ -75,7 +75,6 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <#assign text>${score}</#assign>
-                                <#assign json=text?eval />
                                 <table class="table table-striped table-hover">
                                     <thead>
                                     <tr>
@@ -91,33 +90,12 @@
                                         <th>是否通过</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <#list json as record>
-                                        <tr>
-                                            <td>${record.course.name}</td>
-                                            <td>${record.course.type}</td>
-                                            <td>${record.course.teacher.name}</td>
-                                            <td>${record.value}</td>
-                                            <#assign credit>${record.value/20}</#assign>
-                                            <td>${credit}</td>
-                                            <td></td>
-                                            <td>${record.course.year} - ${record.course.year?eval + 1}</td>
-                                            <td>${record.course.term!""}</td>
-                                            <td>${record.course.testForm!""}</td>
-                                            <#assign isPassed>${record.identity}</#assign>
-                                            <td>
-                                                <#if isPassed=="1">
-                                                    不及格
-                                                <#else>
-                                                    及格
-                                                </#if>
-                                            </td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </#list>
+                                    <tbody id="tbody">
                                     </tbody>
                                 </table>
+                                <div>
+                                    <ul class="pagination" id="pagination" style="justify-content: center"></ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -420,4 +398,104 @@
             </div>
         </div>
     </section>
+    <script>
+        var page = 1;
+        //当前页，默认等于1
+        var pageSize = 10;
+        var json = ${text};
+        var jsonObj = eval(json);
+
+        function loadPagination() {
+            var s = "";
+            //用于分页标签嵌入
+            var minPage = 1;
+            //最小页码
+            var maxPage = 1;
+            //最大页码
+            var totalRecord = jsonObj.length;
+            var maxPage = Math.ceil(totalRecord / pageSize);
+//加载上一页
+            s += "<li class='page-item'><a class='page-link' id='prePage'>&laquo;</a></li>";
+
+
+//        加载分页列表
+            for (var i = page - 4; i < page + 5; i++) {
+                //i代表列表的页数
+                if (i >= minPage && i <= maxPage) {
+                    if (i == page) {
+                        s += " <li class='page-item active'><a class='page-link'>" + i + "</a></li>"
+                    } else {
+                        s += " <li class='page-item'><a class='page-link'>" + i + "</a></li>";
+                    }
+                }
+            }
+            //        加载下一页
+            s += "<li class='page-item'><a class='page-link' id='nextPage'>&raquo;</a></li>";
+            load();
+            $("#pagination").html(s);
+            //给列表加上点击事件
+            $(".page-item").click(function () {
+                //改变当前页数
+                //把点击的页数，扔给page（当前页）
+                page = $(this).text();
+                console.log("当前页数:"+page);
+//            page获取了当前页，重新加载以下方法
+                //调用load方法
+                load();
+                //把加载数据封装成一个方法
+                loadPagination();
+                //加载分页信息方法
+            })
+            //上一页点击事件
+            $("#prePage").click(function () {
+                //改变当前页
+                console.log("i was used");
+                if (page > 1) {
+                    //如果不是第一页
+                    page = parseInt(page) - 1;
+                }
+                //            page获取了当前页，重新加载以下方法
+                //调用load方法
+                loadPagination();
+                load();
+                //把加载数据封装成一个方法
+                //加载分页信息方法
+            })
+            //下一页点击事件
+            $("#nextPage").click(function () {
+//            alert(maxPage);
+                if (page < maxPage) {
+                    //如果不是最后一页
+                    page = parseInt(page) + 1;
+                }
+                //            page获取了当前页，重新加载以下方法
+                //调用load方法
+                load();
+                //把加载数据封装成一个方法
+                loadPagination();
+                //加载分页信息方法
+            });
+        };
+        window.onload = loadPagination;
+
+        function load() {
+            //有page传进来
+            var str = "";
+            for(var i=(page-1)*pageSize;i<(page-1)*pageSize+pageSize;i++){
+                if(i<=jsonObj.length-1){
+                    let identity=jsonObj[i].identity;
+                    let isPassed="不及格";
+                    if(identity=0)
+                        isPassed="及格";
+                    let score=parseFloat(jsonObj[i].value);
+                    let credit=score/20;
+                    str=str+"<tr><td>"+jsonObj[i].course.name+"</td>"+"<td>"+jsonObj[i].course.type+"</td>"
+                        +"<td>"+jsonObj[i].course.teacher.name+"</td>"+"<td>"+jsonObj[i].value+"</td>"
+                        +"<td>"+credit+"</td>"+"<td></td>" +"<td>"+jsonObj[i].course.year+"</td>" +"<td>"+jsonObj[i].course.term+"</td>"
+                        +"<td></td>"+"<td>"+isPassed+"</td></tr>"
+                }
+            }
+            $("#tbody").html(str);
+        }
+    </script>
 </@student>
