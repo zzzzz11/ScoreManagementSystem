@@ -46,7 +46,7 @@
                     <span class="heading">Extras</span>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#">
+                            <a href="${ctx}/teacher/feedback">
                                 <i class="icon-mail"></i>意见反馈
                             </a>
                         </li>

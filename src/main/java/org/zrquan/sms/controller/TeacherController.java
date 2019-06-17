@@ -76,4 +76,8 @@ public class TeacherController {
 		return "teacher/teacherProfile";
 	}
 
+	@RequestMapping("feedback")
+	public String sendFeedback() {
+		return "teacher/teacherFeedback";
+	}
 }
