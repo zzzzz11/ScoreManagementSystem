@@ -68,6 +68,8 @@ public class ManagerController {
 	public String manageCourseInfo(Model model,
 								   @RequestParam(value = "message", required = false) String message) {
 		String courseJson = managerService.getCourseInfo();
+		if (message != null && !message.equals(""))
+			model.addAttribute("message", message);
 		model.addAttribute("courses", courseJson);
 
 		return "manager/managerCourse";
@@ -120,6 +122,7 @@ public class ManagerController {
 		}
 
 		return result;
+
 	}
 
 	/**

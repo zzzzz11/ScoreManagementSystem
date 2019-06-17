@@ -1,6 +1,4 @@
 package org.zrquan.sms.service.interfaces;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.zrquan.sms.entity.Student;
 

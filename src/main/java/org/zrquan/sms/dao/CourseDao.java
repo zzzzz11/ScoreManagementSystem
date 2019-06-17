@@ -17,5 +17,7 @@ public interface CourseDao {
 
 	int deleteById(@Param("id") int id);
 
+	List<Double> getValueList(@Param("courseId") int courseId);
+
 	List<Course> searchByCondition(@Param("condition") String condition, @Param("keyword") String keyword);
 }

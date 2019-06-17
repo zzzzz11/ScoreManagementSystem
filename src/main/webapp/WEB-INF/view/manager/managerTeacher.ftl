@@ -8,38 +8,42 @@
 
     <section class="form">
         <div class="container-fluid">
-            <div class="col-lg-10 offset-1">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                <tr>
-                                    <th>名字</th>
-                                    <th>工号</th>
-                                    <th>职称</th>
-                                    <th>所属学院</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <#-- 变量声明 -->
-                                <#if teachers??>
-                                    <#assign text>${teachers}</#assign>
-                                    <#assign teachersJson=text?eval />
-                                    <#list teachersJson as teacher>
-                                        <tr>
-                                            <td>${teacher.name}</td>
-                                            <td>${teacher.number}</td>
-                                            <td>${teacher.title}</td>
-                                            <td>${teacher.dept.name}</td>
-                                        </tr>
-                                    </#list>
-                                </#if>
-                                </tbody>
-                            </table>
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>名字</th>
+                                        <th>工号</th>
+                                        <th>职称</th>
+                                        <th>所属学院</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <#-- 变量声明 -->
+                                    <#if teachers??>
+                                        <#assign text>${teachers}</#assign>
+                                        <#assign teachersJson=text?eval />
+                                        <#list teachersJson as teacher>
+                                            <tr>
+                                                <td>${teacher.name}</td>
+                                                <td>${teacher.number}</td>
+                                                <td>${teacher.title}</td>
+                                                <td>${teacher.dept.name}</td>
+                                            </tr>
+                                        </#list>
+                                    </#if>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-2"></div>
             </div>
         </div>
     </section>

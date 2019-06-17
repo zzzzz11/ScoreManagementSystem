@@ -13,4 +13,5 @@ public class StudentServiceImplTest extends BaseTest {
 		String json = studentService.getScoreInfo("16369003");
 		System.out.println(json);
 	}
+
 }

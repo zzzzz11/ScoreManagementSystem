@@ -11,6 +11,28 @@
             <div class="col-lg-10 offset-1">
                 <div class="card">
                     <div class="card-body">
+
+                        <#if message??>
+                            <#if message=="添加成功！">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                     style="width: fit-content">
+                                    <strong>${message}</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            <#elseif message=="添加失败，务必先完善教师信息。">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                     style="width: fit-content">
+                                    <strong>${message}</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </#if>
+                        </#if>
+
+
                         <div class="row">
                             <!-- 查询功能 -->
                             <div class="col-sm-7">
@@ -89,16 +111,19 @@
                                                 <button type="button" data-dismiss="modal" class="btn btn-secondary">
                                                     取消
                                                 </button>
-                                                <button type="submit" class="btn btn-success">确定</button>
+                                                <button type="submit" class="btn btn-success">
+                                                    确定
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <!-- 表格 -->
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table id="main" class="table table-striped table-hover">
                                 <thead>
                                 <tr>
                                     <th>名称</th>
@@ -108,7 +133,7 @@
                                     <th>学时</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="result">
                                 <#-- 变量声明 -->
                                 <#if courses??>
                                     <#assign text>${courses}</#assign>
@@ -144,6 +169,18 @@
                 data: params,
                 dataType: "json",
                 success: function (data) {
+                    $("#result tr").remove();// 删除ID=“result”标签的字标签tr下所有内容
+                    // 以下代码为循环布局
+                    for (let i in data) {
+                        const trtd = "<td>" + data[i].name + "</td><td>"
+                            + data[i].teacher.name + "</td><td>"
+                            + data[i].type + "</td><td>"
+                            + data[i].credit + "</td><td>"  // 商品名
+                            + data[i].period + "</td><td>"  // 商品价格
+                            + "</td>"; // 商品折后价
+                        // 将以上标签动态添加到tbody中进行展示
+                        $("#main tbody").append("<tr>" + trtd + "</tr>");
+                    }
                     console.log(data);
                 },
                 error: function (data) {
@@ -151,6 +188,5 @@
                 }
             });
         }
-
     </script>
 </@manager>

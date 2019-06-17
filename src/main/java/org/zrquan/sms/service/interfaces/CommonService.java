@@ -14,4 +14,12 @@ public interface CommonService {
 	 * @return Json
 	 */
 	String retrieveMajor();
+
+	/**
+	 * 某课程学生人数
+	 *
+	 * @param courseId 课程ID
+	 * @return 人数
+	 */
+	int getCourseStudentCount(int courseId);
 }

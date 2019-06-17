@@ -24,4 +24,10 @@
         where (student_id = #{score.student.id} and course_id = #{score.course.id})
     </delete>
 
+    <select id="getCourseStudentCount" resultType="java.lang.Integer">
+        select COUNT(student_id)
+        from score_check
+        where course_id = #{courseId}
+    </select>
+
 </mapper>

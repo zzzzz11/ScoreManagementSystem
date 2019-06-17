@@ -9,9 +9,10 @@ public class Course {
 	private double average;
 	private String normalDistribution;
 	private Teacher teacher;
-	private String test_form;
+	private String testForm;
 	private String term;
 	private String year;
+	private int studentCount;
 
 	public int getId() {
 		return id;
@@ -77,12 +78,12 @@ public class Course {
 		this.teacher = teacher;
 	}
 
-	public String getTest_form() {
-		return test_form;
+	public String getTestForm() {
+		return testForm;
 	}
 
-	public void setTest_form(String test_form) {
-		this.test_form = test_form;
+	public void setTestForm(String testForm) {
+		this.testForm = testForm;
 	}
 
 	public String getTerm() {
@@ -99,5 +100,13 @@ public class Course {
 
 	public void setYear(String year) {
 		this.year = year;
+	}
+
+	public int getStudentCount() {
+		return studentCount;
+	}
+
+	public void setStudentCount(int studentCount) {
+		this.studentCount = studentCount;
 	}
 }
