@@ -1,5 +1,5 @@
 <#include "managerMacro.ftl">
-<@manager keywords="教务管理员信息" js=["js/edit.js"]>
+<@manager keywords="教务管理员信息" js=[]>
     <header class="page-header">
         <div class="container-fluid">
             <h2 class="no-margin-bottom">用户管理</h2>

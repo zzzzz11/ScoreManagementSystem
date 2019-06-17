@@ -1,5 +1,3 @@
-CREATE DATABASE IF NOT EXISTS `sms_test` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
-USE `sms_test`;
 -- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
 -- Host: localhost    Database: sms_test
@@ -36,7 +34,7 @@ CREATE TABLE `course`
     `teacher_id`    int(11)     NOT NULL COMMENT '任课老师',
     `year`          varchar(45)          DEFAULT NULL COMMENT '学年',
     `term`          varchar(45)          DEFAULT NULL COMMENT '学期（一或二）',
-    `testForm`      varchar(45)          DEFAULT NULL COMMENT '考试方式',
+    `test_form`     varchar(45)          DEFAULT NULL COMMENT '考试方式',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 14
@@ -52,9 +50,9 @@ LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course`
     DISABLE KEYS */;
 INSERT INTO `course`
-VALUES (1, '管理信息系统', 2, '专必', 20, 60, 1, 1, '2018', '2', NULL),
-       (2, '网络开发工具与技术', 2, '专选', 18, 61, 1, 2, '2018', '2', NULL),
-       (3, '信息分析与决策', 3, '专必', 20, 57, 1, 3, '2018', '2', NULL);
+VALUES (1, '管理信息系统', 2, '专必', 20, 60, 1, 1, '2018', '2', '笔试'),
+       (2, '网络开发工具与技术', 2, '专选', 18, 61, 1, 2, '2018', '2', '上机'),
+       (3, '信息分析与决策', 3, '专必', 20, 57, 1, 3, '2018', '2', '笔试');
 /*!40000 ALTER TABLE `course`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -121,7 +119,6 @@ INSERT INTO `educational_manager`
 VALUES (1, '123', 'zrquan', 1),
        (2, '4444', '测试用户', 1),
        (3, '33333', '测试用户2', 1),
-       (4, '', '', 1),
        (5, '55555', '测试用户4', 1);
 /*!40000 ALTER TABLE `educational_manager`
     ENABLE KEYS */;
@@ -136,9 +133,13 @@ DROP TABLE IF EXISTS `major`;
 SET character_set_client = utf8mb4;
 CREATE TABLE `major`
 (
-    `id`            int(11)     NOT NULL AUTO_INCREMENT,
-    `major_name`    varchar(45) NOT NULL,
-    `department_id` int(11)     NOT NULL COMMENT '所属院系',
+    `id`                int(11)     NOT NULL AUTO_INCREMENT,
+    `major_name`        varchar(45) NOT NULL,
+    `department_id`     int(11)     NOT NULL COMMENT '所属院系',
+    `pro_need_credit`   int(11) DEFAULT NULL COMMENT '专必学分要求',
+    `com_need_credit`   int(11) DEFAULT NULL COMMENT '公必学分要求',
+    `pro_select_credit` int(11) DEFAULT NULL COMMENT '专选学分要求',
+    `com_select_credit` int(11) DEFAULT NULL COMMENT '公选学分要求',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 2
@@ -154,7 +155,7 @@ LOCK TABLES `major` WRITE;
 /*!40000 ALTER TABLE `major`
     DISABLE KEYS */;
 INSERT INTO `major`
-VALUES (1, '信息管理与信息系统', 1);
+VALUES (1, '信息管理与信息系统', 1, 64, 33, 32, 16);
 /*!40000 ALTER TABLE `major`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -210,7 +211,7 @@ CREATE TABLE `score`
     `gpa`        double DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 4
+  AUTO_INCREMENT = 7
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci COMMENT ='成绩表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -225,7 +226,10 @@ LOCK TABLES `score` WRITE;
 INSERT INTO `score`
 VALUES (1, 1, 1, 60, 0, NULL),
        (2, 2, 1, 61, 0, NULL),
-       (3, 3, 1, 57, 1, NULL);
+       (3, 3, 1, 57, 1, NULL),
+       (4, 1, 2, 87, 0, NULL),
+       (5, 2, 2, 55, 1, NULL),
+       (6, 3, 2, 77, 0, NULL);
 /*!40000 ALTER TABLE `score`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -242,10 +246,11 @@ CREATE TABLE `score_check`
     `id`         int(11) NOT NULL AUTO_INCREMENT,
     `course_id`  int(11) NOT NULL,
     `student_id` int(11) NOT NULL,
-    `value`      double  NOT NULL,
+    `value`      double  NOT NULL COMMENT '成绩（NULL代表教师未提交）',
     `gpa`        double DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
+  AUTO_INCREMENT = 2
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci COMMENT ='待审核成绩表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -292,8 +297,8 @@ LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student`
     DISABLE KEYS */;
 INSERT INTO `student`
-VALUES (1, '16369003', '曾润铨', 1, 'A', 1, 4),
-       (3, '4444', '测试用户', 1, 'A班', NULL, NULL);
+VALUES (1, '16369003', '曾润铨', 1, 'A班', 1, 4),
+       (2, '16369004', '测试用户', 1, 'A班', NULL, NULL);
 /*!40000 ALTER TABLE `student`
     ENABLE KEYS */;
 UNLOCK TABLES;
@@ -406,7 +411,7 @@ VALUES (1, '16369003', '曾润铨', '1234', 'student', NULL, NULL, NULL, '2019-0
        (3, '63619002', '徐健', '1234', 'teacher', NULL, NULL, NULL, '2019-06-03 01:45:58', '2019-06-03 01:47:11'),
        (4, '63619003', '聂卉', '1234', 'teacher', NULL, NULL, NULL, '2019-06-04 03:09:19', '2019-06-04 03:09:27'),
        (7, '123', 'zrquan', '123', 'manager', NULL, NULL, NULL, '2019-06-13 07:40:15', '2019-06-15 02:25:07'),
-       (10, '4444', '测试用户', '4444', 'student', NULL, NULL, NULL, '2019-06-15 09:47:53', '2019-06-15 09:47:53'),
+       (10, '16369004', '测试用户', '1234', 'student', NULL, NULL, NULL, '2019-06-15 09:47:53', '2019-06-16 13:31:01'),
        (12, '55555', '测试用户4', '5555', 'manager', NULL, 'ashen0ne@163.com', '13265321450', '2019-06-15 12:37:49',
         '2019-06-15 12:37:49'),
        (13, '123456', '测试教师', '3456', 'teacher', NULL, NULL, NULL, '2019-06-15 13:09:44', '2019-06-15 13:09:44');
@@ -431,4 +436,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES = @OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-16 10:27:15
+-- Dump completed on 2019-06-17 21:34:57

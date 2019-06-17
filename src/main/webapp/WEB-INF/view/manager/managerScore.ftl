@@ -1,5 +1,5 @@
 <#include "managerMacro.ftl">
-<@manager keywords="管理员管理界面查看" js=["js/edit.js"]>
+<@manager keywords="管理员管理界面查看" js=[]>
 
     <header class="page-header">
         <div class="container-fluid">
@@ -46,20 +46,20 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-primary" href="${ctx}/manager/detail">查看详情</a>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary" href="${ctx}/manager/detail">查看详情</a>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>

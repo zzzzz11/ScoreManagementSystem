@@ -1,5 +1,5 @@
 <#include "teacherMacro.ftl">
-<@teacher keywords="教师课程查看" js=["js/edit.js"]>
+<@teacher keywords="教师课程查看" js=[]>
 
     <header class="page-header">
         <div class="container-fluid">

@@ -22,8 +22,7 @@
                                 </button>
                                 <div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow">
                                     <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a>
-                                    <a href="javascript:void(0)" class="dropdown-item export"
-                                       onclick="exportExcel('#stable')">
+                                    <a href="javascript:void(0)" class="dropdown-item export">
                                         <i class="fa fa-gear"></i>Export
                                     </a>
                                 </div>
@@ -68,20 +67,20 @@
                             <div class="d-inline-flex ml-5">
                                 <div class="mb-3">
                                     <div class="list-inline-item">
-                                        <input id="checkboxCustom1" type="checkbox" value="" class="checkbox-template">
-                                        <label for="checkboxCustom1">专必</label>
+                                        <input type="checkbox" value="" class="checkbox-template typeFilter">
+                                        <label>专必</label>
                                     </div>
                                     <div class="list-inline-item">
-                                        <input id="checkboxCustom2" type="checkbox" value="" class="checkbox-template">
-                                        <label for="checkboxCustom2">公必</label>
+                                        <input type="checkbox" value="" class="checkbox-template typeFilter">
+                                        <label>公必</label>
                                     </div>
                                     <div class="list-inline-item">
-                                        <input id="checkboxCustom3" type="checkbox" value="" class="checkbox-template">
-                                        <label for="checkboxCustom3">专选</label>
+                                        <input type="checkbox" value="" class="checkbox-template typeFilter">
+                                        <label>专选</label>
                                     </div>
                                     <div class="list-inline-item">
-                                        <input id="checkboxCustom4" type="checkbox" value="" class="checkbox-template">
-                                        <label for="checkboxCustom4">公选</label>
+                                        <input type="checkbox" value="" class="checkbox-template typeFilter">
+                                        <label>公选</label>
                                     </div>
                                 </div>
                             </div>
@@ -143,8 +142,7 @@
                                         aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i>
                                 </button>
                                 <div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow">
-                                    <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a
-                                            href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a>
+                                    <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a>
                                 </div>
                             </div>
                         </div>
@@ -275,8 +273,7 @@
                                 </button>
                                 <div aria-labelledby="closeCard3"
                                      class="dropdown-menu dropdown-menu-right has-shadow">
-                                    <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a
-                                            href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a>
+                                    <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a>
                                 </div>
                             </div>
                         </div>
@@ -422,9 +419,7 @@
                                         <div aria-labelledby="closeCard1"
                                              class="dropdown-menu dropdown-menu-right has-shadow">
                                             <a href="#" class="dropdown-item remove"> <i
-                                                        class="fa fa-times"></i>Close</a><a href="#"
-                                                                                            class="dropdown-item edit">
-                                                <i class="fa fa-gear"></i>Edit</a>
+                                                        class="fa fa-times"></i>Close</a>
                                         </div>
                                     </div>
                                 </div>
@@ -461,8 +456,7 @@
                                         <div aria-labelledby="closeCard1"
                                              class="dropdown-menu dropdown-menu-right has-shadow">
                                             <a href="#" class="dropdown-item remove"> <i
-                                                        class="fa fa-times"></i>Close</a><a
-                                                    href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a>
+                                                        class="fa fa-times"></i>Close</a>
                                         </div>
                                     </div>
                                 </div>
@@ -612,23 +606,5 @@
 
         </#noparse>
 
-        function exportExcel(id) {
-            $(id).table2excel({
-                // 不被导出的表格行的CSS class类
-                exclude: ".noExl",
-                // 导出的Excel文档的名称
-                name: "Excel Document Name",
-                // Excel文件的名称
-                filename: "test",
-                //文件后缀名
-                fileext: ".xls",
-                //是否排除导出图片
-                exclude_img: false,
-                //是否排除导出超链接
-                exclude_links: false,
-                //是否排除导出输入框中的内容
-                exclude_inputs: false
-            })
-        }
     </script>
 </@student>
