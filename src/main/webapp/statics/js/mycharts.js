@@ -22,10 +22,15 @@ $(document).ready(function () {
             legend: {labels: {fontColor: "#777", fontSize: 12}},
             scales: {
                 xAxes: [{
+                    ticks:{
+                        autoSkip:false,
+                        minRotation:45
+                    },
                     display: true,
                     gridLines: {
                         color: '#eee'
-                    }
+                    },
+
                 }],
                 yAxes: [{
                     display: true,
@@ -36,10 +41,10 @@ $(document).ready(function () {
             },
         },
         data: {
-            labels: ["一月", "February", "March", "April", "May", "June", "July"],
+            labels: ["大一第1学期", "大一第2学期", "大二第1学期", "大二第2学期", "大三第1学期", "大三第2学期", "大四第1学期", "大四第2学期"],
             datasets: [
                 {
-                    label: "Data Set One",
+                    label: "所有成绩",
                     fill: true,
                     lineTension: 0.3,
                     backgroundColor: gradient1,
@@ -62,7 +67,7 @@ $(document).ready(function () {
                     spanGaps: false
                 },
                 {
-                    label: "Data Set Two",
+                    label: "去掉公选成绩",
                     fill: true,
                     lineTension: 0.3,
                     backgroundColor: gradient2,
@@ -99,10 +104,10 @@ $(document).ready(function () {
         },
         data: {
             labels: [
-                "A",
-                "B",
-                "C",
-                "D"
+                "公选",
+                "专选",
+                "公必",
+                "专必"
             ],
             datasets: [
                 {
