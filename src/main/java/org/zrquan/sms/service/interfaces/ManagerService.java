@@ -96,4 +96,7 @@ public interface ManagerService {
 	 */
 	boolean addManager(Manager manager, int deptId, String email, String phone);
 
+	String getAuditCourse();
+
+	String getAuditStudent(int courseId);
 }

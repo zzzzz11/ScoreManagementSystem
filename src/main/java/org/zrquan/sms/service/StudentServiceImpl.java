@@ -2,6 +2,7 @@ package org.zrquan.sms.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zrquan.sms.dao.CourseDao;
@@ -51,7 +52,7 @@ public class StudentServiceImpl implements StudentService {
 			course.setStudentCount(count);
 		}
 
-		String result = JSON.toJSONString(scores);
+		String result = JSON.toJSONString(scores, SerializerFeature.DisableCircularReferenceDetect);
 		return result;
 	}
 
@@ -83,7 +84,7 @@ public class StudentServiceImpl implements StudentService {
 			result.put(type.getKey(), attr);
 		}
 
-		return result.toJSONString();
+		return JSON.toJSONString(result, SerializerFeature.DisableCircularReferenceDetect);
 	}
 
 	@Override

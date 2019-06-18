@@ -28,40 +28,42 @@
                             <h3 class="h4">待处理申请</h3>
                         </div>
 
-
                         <div class="card-body">
                             <div class="table-responsive">
 
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>课程号</th>
-                                        <th>开课时间</th>
-                                        <th>课程名</th>
-                                        <th>学分</th>
-                                        <th>课程类型</th>
-                                        <th>学时</th>
-                                        <th>考试类型</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-primary" href="${ctx}/manager/detail">查看详情</a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <#if courses??>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>课程名</th>
+                                            <th>课程类型</th>
+                                            <th>教师</th>
+                                            <th>学分</th>
+                                            <th>学时</th>
+                                            <th>考试类型</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <#assign cText = courses>
+                                        <#assign cJson = cText?eval>
+                                        <#list cJson as course>
+                                            <tr>
+                                                <td>${course.name}</td>
+                                                <td>${course.type}</td>
+                                                <td>${(course.teacher.name)!""}</td>
+                                                <td>${course.credit}</td>
+                                                <td>${course.period}</td>
+                                                <td>${(course.testForm)!""}</td>
+                                                <td>
+                                                    <a class="btn btn-primary"
+                                                       href="${ctx}/manager/detail?cid=${course.id}">查看详情</a>
+                                                </td>
+                                            </tr>
+                                        </#list>
+                                        </tbody>
+                                    </table>
+                                <#else>
+                                </#if>
                             </div>
                         </div>
                     </div>

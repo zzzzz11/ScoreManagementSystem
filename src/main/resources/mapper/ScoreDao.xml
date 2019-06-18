@@ -43,4 +43,9 @@
         where course_id = #{courseId}
     </select>
 
+    <select id="retrieveScores" resultMap="ScoreResultMap">
+        select *
+        from score
+    </select>
+
 </mapper>

@@ -8,6 +8,7 @@ import org.zrquan.sms.dao.*;
 import org.zrquan.sms.entity.*;
 import org.zrquan.sms.service.interfaces.ManagerService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,6 +27,8 @@ public class ManagerServiceImpl implements ManagerService {
 	DepartmentDao departmentDao;
 	@Autowired
 	MajorDao majorDao;
+	@Autowired
+	TempScoreDao tempScoreDao;
 
 	@Override
 	public String getCourseInfo() {
@@ -172,4 +175,37 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 		return false;
 	}
+
+	@Override
+	public String getAuditCourse() {
+		List<Score> tScores = tempScoreDao.retrieveScores();
+		List<Course> tCourses = new ArrayList<>();
+
+		for (Score score : tScores) {
+			Course course = score.getCourse();
+
+			if (!tCourses.contains(course))
+				tCourses.add(course);
+		}
+
+		String result = JSON.toJSONString(tCourses, SerializerFeature.DisableCircularReferenceDetect);
+
+		return result;
+	}
+
+	@Override
+	public String getAuditStudent(int courseId) {
+		List<Score> tScores = tempScoreDao.retrieveScores();
+		List<Score> resultScores = new ArrayList<>();
+
+		for (Score score : tScores) {
+			if (score.getCourse().getId() == courseId) {
+				resultScores.add(score);
+			}
+		}
+
+		String result = JSON.toJSONString(resultScores, SerializerFeature.DisableCircularReferenceDetect);
+		return result;
+	}
+
 }

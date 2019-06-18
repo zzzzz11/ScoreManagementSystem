@@ -70,12 +70,8 @@ public class StudentController {
 		return "student/studentProfile";
 	}
 
-	/**
-	 * 没什么用的页面
-	 */
-	@RequestMapping("temp")
-	public String showTempPage(Model model) {
-
-		return "student/studentTemp";
+	@RequestMapping("feedback")
+	public String sendFeedback() {
+		return "student/studentFeedback";
 	}
 }

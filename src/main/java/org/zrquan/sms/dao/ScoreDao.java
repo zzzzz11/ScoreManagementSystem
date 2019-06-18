@@ -11,6 +11,8 @@ public interface ScoreDao {
 	List<Score> getScoreByTeacherNumber(@Param("teacherNumber") String teacherNumber);
 
 	int getCourseStudentCount(@Param("courseId") int courseId);
+
+	List<Score> retrieveScores();
 }
 
 

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.zrquan.sms.entity.Teacher;
 import org.zrquan.sms.entity.User;
 import org.zrquan.sms.service.TeacherServiceImpl;
@@ -32,7 +34,6 @@ public class TeacherController {
 
 	/**
 	 * 教师教学课程查看
-	 * 添加成绩
 	 */
 	@RequestMapping(value = {"course", "main"})
 	public String getTeacherCourse(Model model,
@@ -45,17 +46,23 @@ public class TeacherController {
 
 		return "teacher/teacherCourse";
 	}
-//    public String setTeacherScore(HttpServletRequest request,
-//                                  @RequestParam("File") File score){
-//
-//        return "teacher/teacherCourse";
-//    }
 
 	/**
-	 * 成绩查看
+	 * 成绩添加页面
 	 */
 	@RequestMapping("score")
-	public String getTeacherScore(Model model) {
+	public String getTeacherScore(Model model,
+								  @RequestParam int cid) {
+		String score = teacherService.getCourseScore(cid);
+		String tempScore = teacherService.getCourseTempScore(cid);
+
+		if (!score.equals("")) {
+			model.addAttribute("isCheck", true);
+			model.addAttribute("scores", score);
+		} else {
+			model.addAttribute("isCheck", false);
+			model.addAttribute("scores", tempScore);
+		}
 
 		return "teacher/teacherScore";
 	}
@@ -79,5 +86,16 @@ public class TeacherController {
 	@RequestMapping("feedback")
 	public String sendFeedback() {
 		return "teacher/teacherFeedback";
+	}
+
+	@RequestMapping(value = {"submitScore"}, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String submitScore(@RequestParam String scores) {
+		boolean success = teacherService.submitScore(scores);
+
+		if (success)
+			return "成绩提交成功！";
+		else
+			return "提交失败！";
 	}
 }

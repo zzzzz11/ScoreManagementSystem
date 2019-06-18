@@ -23,4 +23,10 @@ public class ManagerServiceImplTest extends BaseTest {
 		boolean flag = managerService.addTeacher(teacher, 1);
 		Assert.assertTrue(flag);
 	}
+
+	@Test
+	public void testGetAuditStudent() {
+		String json = managerService.getAuditStudent(4);
+		System.out.println(json);
+	}
 }

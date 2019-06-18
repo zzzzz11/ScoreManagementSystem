@@ -49,14 +49,20 @@ public class ManagerController {
 	/**
 	 * 成绩审核页面
 	 */
-	@RequestMapping(value = {"score"})
+	@RequestMapping("score")
 	public String auditScore(Model model) {
+		String courses = managerService.getAuditCourse();
+		model.addAttribute("courses", courses);
 
 		return "manager/managerScore";
 	}
 
-	@RequestMapping(value = {"detail"})
-	public String getManagerDetail(Model model) {
+	@RequestMapping("detail")
+	public String auditScoreDetail(Model model,
+								   @RequestParam int cid) {
+
+		String scores = managerService.getAuditStudent(cid);
+		model.addAttribute("scores", scores);
 
 		return "manager/managerDetail";
 	}
@@ -122,7 +128,6 @@ public class ManagerController {
 		}
 
 		return result;
-
 	}
 
 	/**
