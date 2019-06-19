@@ -104,9 +104,13 @@
                                                 <td>${record.type}</td>
                                                 <td>${record.credit}</td>
                                                 <td>${record.period}</td>
-                                                <td>${record.testForm!""}</td>
-                                                <td>${record.year} - ${record.year?eval + 1}</td>
-                                                <td>${record.term!""}</td>
+                                                <td>${(record.testForm)!""}</td>
+                                                <#if record.year??>
+                                                    <td>${record.year} - ${record.year?eval + 1}</td>
+                                                <#else>
+                                                    <td></td>
+                                                </#if>
+                                                <td>${(record.term)!""}</td>
                                                 <td>
                                                     <div class="btn-group pull-right">
                                                         <a class="btn btn-primary"

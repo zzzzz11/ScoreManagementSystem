@@ -49,7 +49,9 @@ public class StudentServiceImpl implements StudentService {
 			score.setCrank(getCourseRank(sid, cid));
 			// 课程人数
 			int count = scoreDao.getCourseStudentCount(cid);
+			double average = getCourseAverage(cid);
 			course.setStudentCount(count);
+			course.setAverage(average);
 		}
 
 		String result = JSON.toJSONString(scores, SerializerFeature.DisableCircularReferenceDetect);
@@ -119,5 +121,15 @@ public class StudentServiceImpl implements StudentService {
 			return total.indexOf(myScore) + 1;
 		}
 		return -1;
+	}
+
+	private double getCourseAverage(int cid) {
+		List<Score> scores = scoreDao.getCourseById(cid);
+		int summary = 0;
+		for (Score score : scores) {
+			summary += score.getValue();
+		}
+
+		return summary / scoreDao.getCourseStudentCount(cid);
 	}
 }

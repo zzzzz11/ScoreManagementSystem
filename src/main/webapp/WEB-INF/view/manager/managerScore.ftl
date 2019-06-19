@@ -30,8 +30,7 @@
 
                         <div class="card-body">
                             <div class="table-responsive">
-
-                                <#if courses??>
+                                <#if courses != "[]">
                                     <table class="table table-striped table-hover">
                                         <thead>
                                         <tr>
@@ -63,6 +62,7 @@
                                         </tbody>
                                     </table>
                                 <#else>
+                                    <div class="alert alert-danger"><h3>没有需要处理的成绩记录。</h3></div>
                                 </#if>
                             </div>
                         </div>
@@ -70,7 +70,6 @@
 
                 </div>
             </div>
-
         </div>
     </section>
 </@manager>

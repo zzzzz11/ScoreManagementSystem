@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zrquan.sms.entity.Teacher;
 import org.zrquan.sms.entity.User;
+import org.zrquan.sms.service.ManagerServiceImpl;
 import org.zrquan.sms.service.TeacherServiceImpl;
 
 import javax.servlet.http.HttpSession;
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpSession;
 public class TeacherController {
 	@Autowired
 	TeacherServiceImpl teacherService;
+	@Autowired
+	ManagerServiceImpl managerService;
 
 	/**
 	 * 设置用户基本信息
@@ -67,7 +70,6 @@ public class TeacherController {
 		return "teacher/teacherScore";
 	}
 
-
 	/**
 	 * 教师个人信息（主页）
 	 */
@@ -97,5 +99,13 @@ public class TeacherController {
 			return "成绩提交成功！";
 		else
 			return "提交失败！";
+	}
+
+	@RequestMapping("contact")
+	public String getContact(Model model) {
+		String userJson = managerService.getUserInfo();
+		model.addAttribute("users", userJson);
+
+		return "teacher/teacherContact";
 	}
 }

@@ -30,22 +30,21 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#contact" aria-expanded="false" data-toggle="collapse">
-                                <i class="icon-user"></i>联系
-                            </a>
-                            <ul id="contact" class="collapse list-unstyled ">
-                                <li><a href="${ctx}/manager/temp">通讯录</a></li>
-                            </ul>
-                        </li>
-                        <li>
                             <a href="#system" aria-expanded="false" data-toggle="collapse">
                                 <i class="icon-screen"></i>系统
                             </a>
                             <ul id="system" class="collapse list-unstyled ">
                                 <li><a href="${ctx}/manager/profile">个人信息</a></li>
                                 <li><a href="${ctx}/manager/user">用户管理</a></li>
-                                <li><a href="">意见反馈</a></li>
                             </ul>
+                        </li>
+                    </ul>
+                    <span class="heading">Extras</span>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="${ctx}/manager/feedback">
+                                <i class="icon-mail"></i>意见反馈
+                            </a>
                         </li>
                     </ul>
                 </nav>

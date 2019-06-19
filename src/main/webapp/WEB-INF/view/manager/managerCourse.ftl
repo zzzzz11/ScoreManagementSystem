@@ -15,7 +15,7 @@
                         <div class="card-body">
 
                             <#if message??>
-                                <#if message=="添加成功！">
+                                <#if message=="添加成功">
                                     <div class="alert alert-success alert-dismissible fade show" role="alert"
                                          style="width: fit-content">
                                         <strong>${message}</strong>
@@ -23,7 +23,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                <#elseif message=="添加失败，务必先完善教师信息。">
+                                <#elseif message=="添加失败，务必先完善教师信息">
                                     <div class="alert alert-danger alert-dismissible fade show" role="alert"
                                          style="width: fit-content">
                                         <strong>${message}</strong>
@@ -52,8 +52,6 @@
                                                     <button onclick="searchCourse(this)" data-value="type"
                                                             class="dropdown-item">类型
                                                     </button>
-                                                    <div class="dropdown-divider"></div>
-                                                    <button onclick="void(0)" class="dropdown-item">模糊</button>
                                                 </div>
                                             </div>
                                             <input type="text" class="form-control" name="content">
@@ -62,7 +60,7 @@
                                 </div>
                                 <!-- 添加课程 -->
                                 <button type="button" data-toggle="modal" data-target="#addCourse"
-                                        class="col-sm-1 offset-sm-1 btn btn-primary"
+                                        class="col-sm-1 btn btn-primary"
                                         style="height: fit-content"><strong>新课程</strong>
                                 </button>
                                 <!-- 创建新课程 -->

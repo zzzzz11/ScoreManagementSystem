@@ -13,6 +13,8 @@ public interface ScoreDao {
 	int getCourseStudentCount(@Param("courseId") int courseId);
 
 	List<Score> retrieveScores();
+
+	int addScore(@Param("score") Score score);
+
+	List<Score> getCourseById(@Param("courseId") int courseId);
 }
-
-

@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="card-header d-flex align-items-center">
-                            <h3 class="h4">成绩查询</h3>
+                            <h3 class="h4">课程成绩</h3>
                         </div>
 
                         <div class="card-body">
@@ -67,19 +67,19 @@
                             <div class="d-inline-flex ml-5">
                                 <div class="mb-3">
                                     <div class="list-inline-item">
-                                        <input type="checkbox" value="" class="checkbox-template typeFilter">
+                                        <input type="checkbox" checked="checked" class="checkbox-template typeFilter">
                                         <label>专必</label>
                                     </div>
                                     <div class="list-inline-item">
-                                        <input type="checkbox" value="" class="checkbox-template typeFilter">
+                                        <input type="checkbox" checked="checked" class="checkbox-template typeFilter">
                                         <label>公必</label>
                                     </div>
                                     <div class="list-inline-item">
-                                        <input type="checkbox" value="" class="checkbox-template typeFilter">
+                                        <input type="checkbox" checked="checked" class="checkbox-template typeFilter">
                                         <label>专选</label>
                                     </div>
                                     <div class="list-inline-item">
-                                        <input type="checkbox" value="" class="checkbox-template typeFilter">
+                                        <input type="checkbox" checked="checked" class="checkbox-template typeFilter">
                                         <label>公选</label>
                                     </div>
                                 </div>
@@ -112,16 +112,15 @@
                                             <td>${record.value}</td>
                                             <#assign gpa>${(record.value-50)/10}</#assign>
                                             <td>${gpa}</td>
-                                            <td>${record.crank} / ${record.course.studentCount!""}</td>
+                                            <td>${record.crank} / ${record.course.studentCount!"未统计"}</td>
                                             <td>${record.course.year} - ${record.course.year?eval + 1}</td>
-                                            <td>${record.course.term!""}</td>
-                                            <td>${record.course.testForm!""}</td>
-                                            <#assign isPassed>${record.identity}</#assign>
+                                            <td>${(record.course.term)!"未知"}</td>
+                                            <td>${(record.course.testForm)!"未知"}</td>
                                             <td>
-                                                <#if isPassed == "1">
-                                                    不及格
-                                                <#else>
+                                                <#if (record.value >= 60)>
                                                     及格
+                                                <#else>
+                                                    不及格
                                                 </#if>
                                             </td>
                                         </tr>
@@ -131,7 +130,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <ul class="pagination" id="pagination" style="justify-content: center"></ul>
+                            <#--                            <ul class="pagination" id="pagination" style="justify-content: center"></ul>-->
                         </div>
                     </div>
                     <!-- 学分详情 -->
@@ -173,7 +172,7 @@
                                 <td>公必</td>
                                 <#assign
                                 cnTotal = creditJson.cncredit.totalCredit
-                                cnObtain = creditJson.cncredit.totalCredit
+                                cnObtain = creditJson.cncredit.obtainCredit
                                 >
                                 <#if creditJson.cncredit.courseCount != 0>
                                     <#assign cnAverage = cnObtain/creditJson.cncredit.courseCount>
@@ -191,7 +190,7 @@
                                 <td>专必</td>
                                 <#assign
                                 pnTotal = creditJson.pncredit.totalCredit
-                                pnObtain = creditJson.pncredit.totalCredit
+                                pnObtain = creditJson.pncredit.obtainCredit
                                 >
                                 <#if creditJson.pncredit.courseCount != 0>
                                     <#assign pnAverage = pnObtain/creditJson.pncredit.courseCount>
@@ -209,7 +208,7 @@
                                 <td>公选</td>
                                 <#assign
                                 csTotal = creditJson.cscredit.totalCredit
-                                csObtain = creditJson.cscredit.totalCredit
+                                csObtain = creditJson.cscredit.obtainCredit
                                 >
                                 <#if creditJson.cscredit.courseCount != 0>
                                     <#assign csAverage = csObtain/creditJson.cscredit.courseCount>
@@ -227,7 +226,7 @@
                                 <td>专选</td>
                                 <#assign
                                 psTotal = creditJson.pscredit.totalCredit
-                                psObtain = creditJson.pscredit.totalCredit
+                                psObtain = creditJson.pscredit.obtainCredit
                                 >
                                 <#if creditJson.pscredit.courseCount != 0>
                                     <#assign psAverage = psObtain/creditJson.pscredit.courseCount>
@@ -252,7 +251,7 @@
                                 <td class="ng-binding">${cnAverage + csAverage + pnAverage + psAverage}</td>
                             </tr>
                             <tr>
-                                <td>必修、专选平均绩点</td>
+                                <td>必修、专选平均学分</td>
                                 <td colspan="2" class="ng-binding">${(pnObtain + cnTotal + psTotal)/3}</td>
                                 <#-- TODO 学分排名-->
                                 <td class="ng-binding">57/87</td>
@@ -406,7 +405,7 @@
                     </div>
                     <!-- 可视化 -->
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-7">
                             <!-- 线图 -->
                             <div class="line-chart-example card">
                                 <div class="card-close">
@@ -444,7 +443,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-5">
                             <div class="work-amount card">
                                 <div class="card-close">
                                     <div class="dropdown">
@@ -461,7 +460,7 @@
                                     </div>
                                 </div>
                                 <div class="card-header d-flex align-items-center">
-                                    <h3 class="h4">平均绩点</h3>
+                                    <h4 class="h4">平均绩点</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart text-center">
@@ -492,119 +491,6 @@
     <script>
         var scoreJson = JSON.parse("${scoreText?js_string}");
         var creditList = [${pnAverage}, ${psAverage}, ${cnAverage}, ${csAverage}];
-
-        var page = 1;
-        //当前页，默认等于1
-        var pageSize = 10;
-        var jsonObj = JSON.parse("${scoreText?js_string}");
-
-        function loadPagination() {
-            let s = "";
-            //用于分页标签嵌入
-            let minPage = 1;
-            //最小页码
-            let maxPage = 1;
-            //最大页码
-            let totalRecord = jsonObj.length;
-            maxPage = Math.ceil(totalRecord / pageSize);
-            //加载上一页
-            s += "<li class='page-item'><a class='page-link' id='prePage'>&laquo;</a></li>";
-
-
-            //加载分页列表
-            for (let i = page - 4; i < page + 5; i++) {
-                //i代表列表的页数
-                if (i >= minPage && i <= maxPage) {
-                    if (i === page) {
-                        s += " <li class='page-item active'><a class='page-link'>" + i + "</a></li>"
-                    } else {
-                        s += " <li class='page-item'><a class='page-link'>" + i + "</a></li>";
-                    }
-                }
-            }
-            //加载下一页
-            s += "<li class='page-item'><a class='page-link' id='nextPage'>&raquo;</a></li>";
-            load();
-            $("#pagination").html(s);
-            //给列表加上点击事件
-            $(".page-item").click(function () {
-                //改变当前页数
-                //把点击的页数，扔给page（当前页）
-                page = $(this).text();
-                console.log("当前页数:" + page);
-                //page获取了当前页，重新加载以下方法
-                //调用load方法
-                load();
-                //把加载数据封装成一个方法
-                loadPagination();
-                //加载分页信息方法
-            });
-            //上一页点击事件
-            $("#prePage").click(function () {
-                //改变当前页
-                console.log("i was used");
-                if (page > 1) {
-                    //如果不是第一页
-                    page = parseInt(page) - 1;
-                }
-                //            page获取了当前页，重新加载以下方法
-                //调用load方法
-                loadPagination();
-                load();
-                //把加载数据封装成一个方法
-                //加载分页信息方法
-            });
-            //下一页点击事件
-            $("#nextPage").click(function () {
-                //alert(maxPage);
-                if (page < maxPage) {
-                    //如果不是最后一页
-                    page = parseInt(page) + 1;
-                }
-                //page获取了当前页，重新加载以下方法
-                //调用load方法
-                load();
-                //把加载数据封装成一个方法
-                loadPagination();
-                //加载分页信息方法
-            });
-        }
-
-        window.onload = loadPagination;
-
-        <#noparse>
-
-        function load() {
-            //有page传进来
-            let str = "";
-            for (let i = (page - 1) * pageSize; i < (page - 1) * pageSize + pageSize; i++) {
-                if (i <= jsonObj.length - 1) {
-                    let identity = jsonObj[i].identity;
-                    let isPassed = "不及格";
-                    if (identity === 0)
-                        isPassed = "及格";
-                    let score = parseFloat(jsonObj[i].value);
-                    let credit = (score - 50) / 10;
-                    let year = parseInt(jsonObj[i].course.year);
-                    let yearStr = `${year} - ${year + 1}`;
-                    str += `<tr>
-                            <td>${jsonObj[i].course.name}</td>
-                            <td>${jsonObj[i].course.type}</td>
-                            <td>${jsonObj[i].course.teacher.name}</td>
-                            <td>${jsonObj[i].value}</td>
-                            <td>${credit}</td>
-                            <td>${jsonObj[i].crank / jsonObj[i].course.studentCount}</td>
-                            <td>${yearStr}</td>
-                            <td>${jsonObj[i].course.term}</td>
-                            <td>${jsonObj[i].course.testForm}</td>
-                            <td>${isPassed}</td>
-                        </tr>`;
-                }
-            }
-            $("#tbody").html(str);
-        }
-
-        </#noparse>
-
     </script>
+
 </@student>

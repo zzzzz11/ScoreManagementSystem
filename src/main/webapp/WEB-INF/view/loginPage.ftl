@@ -58,7 +58,7 @@
                                     </button>
                                 </div>
                             </#if>
-                            <a href="#" class="forgot-pass">Forgot Password?</a><br>
+                            <a href="javascript:void(0)" class="forgot-pass">Forgot Password?</a><br>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
         </div>
     </div>
     <div class="copyrights text-center">
-        <p>Design by <a href="#" class="external">Bootstrapious</a></p>
+        <p>Design by <a href="javascript:void(0)">Bootstrapious</a></p>
     </div>
 </div>
 

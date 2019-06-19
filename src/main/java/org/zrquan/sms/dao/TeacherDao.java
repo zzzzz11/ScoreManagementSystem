@@ -17,4 +17,6 @@ public interface TeacherDao {
 	int deleteById(@Param("id") int id);
 
 	List<Teacher> retrieveTeacher();
+
+	List<Teacher> searchByName(@Param("name") String name);
 }

@@ -9,6 +9,7 @@ import org.zrquan.sms.entity.Major;
 import org.zrquan.sms.entity.Student;
 import org.zrquan.sms.entity.User;
 import org.zrquan.sms.service.CommonServiceImpl;
+import org.zrquan.sms.service.ManagerServiceImpl;
 import org.zrquan.sms.service.StudentServiceImpl;
 
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,8 @@ public class StudentController {
 	StudentServiceImpl studentService;
 	@Autowired
 	CommonServiceImpl commonService;
+	@Autowired
+	ManagerServiceImpl managerService;
 
 	/**
 	 * 设置用户基本信息
@@ -73,5 +76,13 @@ public class StudentController {
 	@RequestMapping("feedback")
 	public String sendFeedback() {
 		return "student/studentFeedback";
+	}
+
+	@RequestMapping("contact")
+	public String getContact(Model model) {
+		String userJson = managerService.getUserInfo();
+		model.addAttribute("users", userJson);
+
+		return "student/studentContact";
 	}
 }

@@ -15,4 +15,6 @@ public interface TempScoreDao {
 	List<Score> getScoreByStudentNumber(@Param("number") String number);
 
 	List<Score> retrieveScores();
+
+	int deleteByCourseId(@Param("cid") int cid);
 }

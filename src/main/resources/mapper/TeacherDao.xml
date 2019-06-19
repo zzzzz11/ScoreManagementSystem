@@ -40,9 +40,16 @@
         from teacher
         where tname like #{pattern}
     </select>
+
     <select id="retrieveTeacher" resultMap="TeacherResultMap">
         select *
         from teacher
+    </select>
+
+    <select id="searchByName" resultMap="TeacherResultMap">
+        <bind name="pattern" value="'%' + name + '%'"/>
+        select *
+        from teacher where tname like #{pattern}
     </select>
 
 </mapper>

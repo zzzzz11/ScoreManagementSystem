@@ -1,9 +1,11 @@
 $(document).ready(function () {
     let courses = [];
     let values = [];
+    let averages = []
     scoreJson.forEach((s) => {
         courses.push(s.course.name);
         values.push(s.value);
+        averages.push(s.course.average);
     });
 
     // ------------------------------------------------------- //
@@ -87,8 +89,7 @@ $(document).ready(function () {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    // TODO
-                    data: values,
+                    data: averages,
                     spanGaps: false
                 }
             ]

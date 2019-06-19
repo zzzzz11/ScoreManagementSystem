@@ -32,7 +32,7 @@
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <#if scores??>
+                                <#if scores != "">
                                     <#assign scoreText = scores>
                                     <#assign scoreJson = scoreText?eval>
                                     <#if isCheck = false>
@@ -53,12 +53,12 @@
                                                 <tr>
                                                     <td class="snumber">${score.student.number}</td>
                                                     <td>${score.student.name}</td>
-                                                    <#if score.value??>
+                                                    <#if score.value != 0>
                                                         <td class="score-value">${score.value}</td>
                                                         <td class="gpa">${(score.value - 50)/10}</td>
                                                     <#else>
-                                                        <td>未登记</td>
-                                                        <td>未登记</td>
+                                                        <td class="score-value">未登记</td>
+                                                        <td class="gpa">未登记</td>
                                                     </#if>
                                                     <td>${score.student.major.name}</td>
                                                     <td>${score.course.credit}</td>
@@ -95,9 +95,11 @@
                                             </tbody>
                                         </table>
                                     </#if>
-                                </#if>
-                                <#if isCheck = false>
-                                    <button class="btn btn-primary" id="submitScore">提交成绩</button>
+                                    <#if isCheck = false>
+                                        <button class="btn btn-primary" id="submitScore">提交成绩</button>
+                                    </#if>
+                                <#else>
+                                    <div class="alert alert-danger"><h3>该课程没有学生</h3></div>
                                 </#if>
                             </div>
                         </div>

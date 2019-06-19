@@ -3,7 +3,7 @@
 
     <header class="page-header">
         <div class="container-fluid">
-            <h2 class="no-margin-bottom">成绩详情</h2>
+            <a href="${ctx}/manager/course">课程信息</a> / 成绩详情
         </div>
     </header>
 
@@ -11,7 +11,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-
                     <div class="card">
                         <div class="card-close">
                             <div class="dropdown">
@@ -51,7 +50,7 @@
                                         <#list scoreJson as tscore>
                                             <#assign student = tscore.student>
                                             <tr>
-                                                <td>${student.number}</td>
+                                                <td class="snumber">${student.number}</td>
                                                 <td>${student.name}</td>
                                                 <#if tscore.value != 0>
                                                     <td class="score-value">${tscore.value}</td>
@@ -79,6 +78,7 @@
                                     </table>
                                 <#else>
                                 </#if>
+                                <button class="btn btn-primary" id="submitScore">确认成绩</button>
                             </div>
                         </div>
                     </div>

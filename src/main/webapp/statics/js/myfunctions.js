@@ -25,6 +25,28 @@ function exportExcel(id) {
     })
 }
 
+function sendFeedback(btn) {
+    if (!confirm("确定提交意见?")) return false;
+    let area = $(btn).parents(".card").find(".ql-editor");
+    let content = area.html();
+
+    $.ajax({
+        async: false,
+        type: "POST",
+        url: `../feedback`,
+        data: {content: content},
+        dataType: "text",
+        success: function (data) {
+            alert(data);
+            window.location.reload();
+        },
+        error: function (data) {
+            alert(data);
+            window.location.reload();
+        }
+    });
+}
+
 // 点击edit使表单可编辑
 $(".edit").click(function () {
     $(this).parents(".card").find("fieldset[disabled='disabled']").removeAttr("disabled");
@@ -65,9 +87,12 @@ $(".export").click(function () {
         })
 });
 
-$('#editTable').SetEditable({
-    $addButton: $('#add')
-});
+try {
+    $('#editTable').SetEditable({
+        $addButton: $('#add')
+    });
+} catch (ignored) {
+}
 
 $('#submitScore').click(function () {
     if (!confirm("确定提交成绩?")) return false;
@@ -93,17 +118,25 @@ $('#submitScore').click(function () {
 
     });
 
+    let url = window.location.href;
+    let role = "";
+    if (url.includes("teacher")) role = "teacher";
+    else if (url.includes("manager")) role = "manager";
+
     $.ajax({
         async: false,
         type: "POST",
-        url: "../teacher/submitScore",
+        url: `../${role}/submitScore`,
         data: {scores: JSON.stringify(result)},
         dataType: "json",
         success: function (data) {
-            alert(data);
+            alert(data.responseText);
+            window.location.reload();
         },
         error: function (data) {
-            aler(data);
+            alert(data.responseText);
+            window.location.reload();
         }
     });
 });
+

@@ -21,13 +21,15 @@ public class UserController {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(@RequestParam String accountNumber,
 						@RequestParam String password,
-						Model model) {
+						Model model,
+						HttpSession session) {
 
 		boolean valid = userService.verify(accountNumber, password);
 
 		if (valid) {
 			User user = userService.getUer(accountNumber);
 
+			session.setAttribute("user", user);
 			model.addAttribute("user", user);
 
 			return String.format("redirect:%s/main", user.getUserType());
@@ -39,7 +41,13 @@ public class UserController {
 
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
-		session.invalidate();
+		try {
+			if (session != null) {
+				session.removeAttribute("user");
+				session.invalidate();
+			}
+		} catch (Exception ignored) {
+		}
 		return "loginPage";
 	}
 

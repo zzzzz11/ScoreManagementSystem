@@ -54,7 +54,7 @@
                 user_name like #{pattern}
             </when>
             <when test="condition == 'type'">
-                user_type = #{keyword}
+                user_type like #{pattern}
             </when>
         </choose>
     </select>

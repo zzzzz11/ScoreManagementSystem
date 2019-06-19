@@ -13,6 +13,22 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <form action="${ctx}/manager/searchTeacher" class="form-group" method="post">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <button type="submit"
+                                                        class="btn btn-outline-secondary"
+                                                        aria-expanded="false"><span class="icon-search"></span>
+                                                </button>
+                                            </div>
+                                            <input type="text" class="form-control" name="content">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover">
                                     <thead>
