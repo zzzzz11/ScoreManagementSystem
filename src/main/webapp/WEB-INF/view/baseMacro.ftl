@@ -146,6 +146,7 @@
         <script src="js/jquery.table2excel.js"></script>
         <!-- Main File-->
         <script src="js/front.js"></script>
+        <script src="js/myfunctions.js"></script>
 
         <#-- 遍历扩展页js -->
         <#list base_js as j>

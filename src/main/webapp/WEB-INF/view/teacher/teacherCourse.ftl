@@ -1,5 +1,5 @@
 <#include "teacherMacro.ftl">
-<@teacher keywords="教师课程查看" js=["js/edit.js"]>
+<@teacher keywords="教师课程查看" js=[]>
 
     <header class="page-header">
         <div class="container-fluid">
@@ -26,7 +26,6 @@
                         <div class="card-header d-flex align-items-center">
                             <h3 class="h4">Score table</h3>
                         </div>
-
 
                         <div class="card-body">
                             <!-- 查询表单 -->
@@ -63,20 +62,20 @@
                             <div class="d-inline-flex ml-5">
                                 <div class="mb-3">
                                     <div class="list-inline-item">
-                                        <input id="checkboxCustom1" type="checkbox" value="" class="checkbox-template">
-                                        <label for="checkboxCustom1">专必</label>
+                                        <input type="checkbox" value="" class="checkbox-template typeFilter">
+                                        <label>专必</label>
                                     </div>
                                     <div class="list-inline-item">
-                                        <input id="checkboxCustom2" type="checkbox" value="" class="checkbox-template">
-                                        <label for="checkboxCustom2">公必</label>
+                                        <input type="checkbox" value="" class="checkbox-template typeFilter">
+                                        <label>公必</label>
                                     </div>
                                     <div class="list-inline-item">
-                                        <input id="checkboxCustom3" type="checkbox" value="" class="checkbox-template">
-                                        <label for="checkboxCustom3">专选</label>
+                                        <input type="checkbox" value="" class="checkbox-template typeFilter">
+                                        <label>专选</label>
                                     </div>
                                     <div class="list-inline-item">
-                                        <input id="checkboxCustom4" type="checkbox" value="" class="checkbox-template">
-                                        <label for="checkboxCustom4">公选</label>
+                                        <input type="checkbox" value="" class="checkbox-template typeFilter">
+                                        <label>公选</label>
                                     </div>
                                 </div>
                             </div>
@@ -87,26 +86,23 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                     <tr>
-                                        <th>课程号</th>
-                                        <th>开课时间</th>
                                         <th>课程名</th>
-                                        <th>学分</th>
                                         <th>课程类型</th>
+                                        <th>教师</th>
+                                        <th>学分</th>
                                         <th>学时</th>
                                         <th>考试类型</th>
-                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody id="result">
                                     <#list json as record>
                                         <tr>
-                                            <td>${record.id}</td>
-                                            <td></td>
                                             <td>${record.name}</td>
-                                            <td>${record.credit}</td>
                                             <td>${record.type}</td>
+                                            <td>${record.teacher.name!""}</td>
+                                            <td>${record.credit}</td>
                                             <td>${record.period}</td>
-                                            <td></td>
+                                            <td>${record.testForm!""}</td>
                                             <td>
                                                 <a class="btn btn-primary" href="${ctx}/teacher/score">查看成绩</a>
                                             </td>

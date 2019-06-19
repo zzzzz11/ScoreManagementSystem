@@ -1,5 +1,5 @@
 <#include "managerMacro.ftl">
-<@manager keywords="查看详情" js=["js/edit.js"]>
+<@manager keywords="查看详情" js=[]>
 
     <header class="page-header">
         <div class="container-fluid">
