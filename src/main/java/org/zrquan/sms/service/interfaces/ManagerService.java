@@ -1,5 +1,6 @@
 package org.zrquan.sms.service.interfaces;
 
+import org.springframework.dao.DuplicateKeyException;
 import org.zrquan.sms.entity.Course;
 import org.zrquan.sms.entity.Manager;
 import org.zrquan.sms.entity.Student;
@@ -34,11 +35,6 @@ public interface ManagerService {
 	 * @return Json
 	 */
 	String getUserInfo();
-
-	/**
-	 * 审核成绩
-	 */
-	String auditScore();
 
 	/**
 	 * 查询课程
@@ -81,7 +77,8 @@ public interface ManagerService {
 	 * @param teacher 教师对象
 	 * @param deptId  学院ID
 	 */
-	boolean addTeacher(Teacher teacher, int deptId);
+	boolean addTeacher(Teacher teacher, int deptId, String email, String phone)
+		throws DuplicateKeyException;
 
 	/**
 	 * 添加学生
@@ -89,11 +86,26 @@ public interface ManagerService {
 	 * @param student 学生对象
 	 * @param majorId 专业ID
 	 */
-	boolean addStudent(Student student, int majorId);
+	boolean addStudent(Student student, int majorId, String email, String phone)
+		throws DuplicateKeyException;
 
 	/**
 	 * 添加管理员
 	 */
-	boolean addManager(Manager manager, int deptId, String email, String phone);
+	boolean addManager(Manager manager, int deptId, String email, String phone)
+		throws DuplicateKeyException;
 
+	String getAuditCourse();
+
+	String getAuditStudent(int courseId);
+
+	boolean submitScore(String scoreJson);
+
+	String searchTeacher(String name);
+
+	String searchStudent(String name);
+
+	String getFeedback();
+
+	void deleteFeedback(int id);
 }

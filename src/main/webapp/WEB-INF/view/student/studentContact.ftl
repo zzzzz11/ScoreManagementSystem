@@ -1,8 +1,9 @@
-<#include "managerMacro.ftl">
-<@manager keywords="教务管理员信息" js=[]>
+<#include "studentMacro.ftl">
+<@student keywords="学生信息" js=[]>
+
     <header class="page-header">
         <div class="container-fluid">
-            <h2 class="no-margin-bottom">教师管理</h2>
+            <h2 class="no-margin-bottom">个人信息</h2>
         </div>
     </header>
 
@@ -15,7 +16,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-7">
-                                    <form action="${ctx}/manager/searchTeacher" class="form-group" method="post">
+                                    <form action="" class="form-group" method="post">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <button type="submit"
@@ -33,23 +34,23 @@
                                 <table id="main" class="table table-striped table-hover">
                                     <thead>
                                     <tr>
+                                        <th>账号</th>
                                         <th>名字</th>
-                                        <th>工号</th>
-                                        <th>职称</th>
-                                        <th>所属学院</th>
+                                        <th>邮箱</th>
+                                        <th>电话号码</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <#-- 变量声明 -->
-                                    <#if teachers??>
-                                        <#assign text>${teachers}</#assign>
-                                        <#assign teachersJson=text?eval />
-                                        <#list teachersJson as teacher>
+                                    <#if users??>
+                                        <#assign text>${users}</#assign>
+                                        <#assign usersJson=text?eval />
+                                        <#list usersJson as user>
                                             <tr>
-                                                <td>${teacher.name}</td>
-                                                <td>${teacher.number}</td>
-                                                <td>${teacher.title}</td>
-                                                <td>${teacher.dept.name}</td>
+                                                <td>${user.userName}</td>
+                                                <td>${user.accountNumber}</td>
+                                                <td>${(user.email)!"***"}</td>
+                                                <td>${(user.phone)!"***"}</td>
                                             </tr>
                                         </#list>
                                     </#if>
@@ -230,4 +231,4 @@
         hide();
     </script>
 
-</@manager>
+</@student>

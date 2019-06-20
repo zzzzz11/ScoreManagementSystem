@@ -22,4 +22,6 @@ public interface CommonService {
 	 * @return 人数
 	 */
 	int getCourseStudentCount(int courseId);
+
+	boolean feedback(String account, String content);
 }

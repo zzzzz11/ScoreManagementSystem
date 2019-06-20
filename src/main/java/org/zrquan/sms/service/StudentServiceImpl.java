@@ -2,6 +2,7 @@ package org.zrquan.sms.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zrquan.sms.dao.CourseDao;
@@ -48,10 +49,12 @@ public class StudentServiceImpl implements StudentService {
 			score.setCrank(getCourseRank(sid, cid));
 			// 课程人数
 			int count = scoreDao.getCourseStudentCount(cid);
+			double average = getCourseAverage(cid);
 			course.setStudentCount(count);
+			course.setAverage(average);
 		}
 
-		String result = JSON.toJSONString(scores);
+		String result = JSON.toJSONString(scores, SerializerFeature.DisableCircularReferenceDetect);
 		return result;
 	}
 
@@ -83,7 +86,7 @@ public class StudentServiceImpl implements StudentService {
 			result.put(type.getKey(), attr);
 		}
 
-		return result.toJSONString();
+		return JSON.toJSONString(result, SerializerFeature.DisableCircularReferenceDetect);
 	}
 
 	@Override
@@ -118,5 +121,15 @@ public class StudentServiceImpl implements StudentService {
 			return total.indexOf(myScore) + 1;
 		}
 		return -1;
+	}
+
+	private double getCourseAverage(int cid) {
+		List<Score> scores = scoreDao.getCourseById(cid);
+		int summary = 0;
+		for (Score score : scores) {
+			summary += score.getValue();
+		}
+
+		return summary / scoreDao.getCourseStudentCount(cid);
 	}
 }

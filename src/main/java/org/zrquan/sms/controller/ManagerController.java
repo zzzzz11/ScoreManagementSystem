@@ -1,6 +1,7 @@
 package org.zrquan.sms.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,16 +50,33 @@ public class ManagerController {
 	/**
 	 * 成绩审核页面
 	 */
-	@RequestMapping(value = {"score"})
+	@RequestMapping("score")
 	public String auditScore(Model model) {
+		String courses = managerService.getAuditCourse();
+		model.addAttribute("courses", courses);
 
 		return "manager/managerScore";
 	}
 
-	@RequestMapping(value = {"detail"})
-	public String getManagerDetail(Model model) {
+	@RequestMapping("detail")
+	public String auditScoreDetail(Model model,
+								   @RequestParam int cid) {
+
+		String scores = managerService.getAuditStudent(cid);
+		model.addAttribute("scores", scores);
 
 		return "manager/managerDetail";
+	}
+
+	@RequestMapping(value = {"submitScore"}, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String submitScore(@RequestParam String scores) {
+		boolean success = managerService.submitScore(scores);
+
+		if (success)
+			return "成绩提交成功！";
+		else
+			return "提交失败！";
 	}
 
 	/**
@@ -122,7 +140,6 @@ public class ManagerController {
 		}
 
 		return result;
-
 	}
 
 	/**
@@ -136,9 +153,9 @@ public class ManagerController {
 
 		boolean success = managerService.addCourse(course, teacherName);
 		if (success) {
-			model.addAttribute("message", "添加成功！");
+			model.addAttribute("message", "添加成功");
 		} else {
-			model.addAttribute("message", "添加失败，务必先完善教师信息。");
+			model.addAttribute("message", "添加失败，务必先完善教师信息");
 		}
 
 		return "redirect:/manager/course";
@@ -150,13 +167,20 @@ public class ManagerController {
 	@RequestMapping("add/teacher")
 	public String addTeacher(Model model,
 							 @ModelAttribute Teacher teacher,
-							 @RequestParam int deptId) {
+							 @RequestParam int deptId,
+							 @RequestParam String email,
+							 @RequestParam String phone) {
 
-		boolean success = managerService.addTeacher(teacher, deptId);
-		if (success) {
-			model.addAttribute("message", "添加成功！");
-		} else {
-			model.addAttribute("message", "添加失败，务必先完善教师信息。");
+		boolean success = false;
+		try {
+			success = managerService.addTeacher(teacher, deptId, email, phone);
+			if (success) {
+				model.addAttribute("message", "添加成功");
+			} else {
+				model.addAttribute("message", "添加失败");
+			}
+		} catch (DuplicateKeyException e) {
+			model.addAttribute("message", "账号已存在");
 		}
 
 		return "redirect:/manager/user";
@@ -168,13 +192,20 @@ public class ManagerController {
 	@RequestMapping("add/student")
 	public String addStudent(Model model,
 							 @ModelAttribute Student student,
-							 @RequestParam int majorId) {
+							 @RequestParam int majorId,
+							 @RequestParam String email,
+							 @RequestParam String phone) {
 
-		boolean success = managerService.addStudent(student, majorId);
-		if (success) {
-			model.addAttribute("message", "添加成功！");
-		} else {
-			model.addAttribute("message", "添加失败，务必先完善教师信息。");
+		boolean success = false;
+		try {
+			success = managerService.addStudent(student, majorId, email, phone);
+			if (success) {
+				model.addAttribute("message", "添加成功");
+			} else {
+				model.addAttribute("message", "添加失败");
+			}
+		} catch (DuplicateKeyException e) {
+			model.addAttribute("message", "账号已存在");
 		}
 
 		return "redirect:/manager/user";
@@ -187,11 +218,16 @@ public class ManagerController {
 							 @RequestParam String email,
 							 @RequestParam String phone) {
 
-		boolean success = managerService.addManager(manager, deptId, email, phone);
-		if (success) {
-			model.addAttribute("message", "添加成功！");
-		} else {
-			model.addAttribute("message", "添加失败，务必先完善教师信息。");
+		boolean success = false;
+		try {
+			success = managerService.addManager(manager, deptId, email, phone);
+			if (success) {
+				model.addAttribute("message", "添加成功");
+			} else {
+				model.addAttribute("message", "添加失败");
+			}
+		} catch (DuplicateKeyException e) {
+			model.addAttribute("message", "账号已存在");
 		}
 
 		return "redirect:/manager/user";
@@ -201,7 +237,8 @@ public class ManagerController {
 	 * 用户管理页
 	 */
 	@RequestMapping("user")
-	public String manageUserInfo(Model model) {
+	public String manageUserInfo(Model model,
+								 @RequestParam(value = "message", required = false) String message) {
 		String userJson = managerService.getUserInfo();
 		String deptJson = commonService.retrieveDept();
 		String majorJson = commonService.retrieveMajor();
@@ -209,6 +246,37 @@ public class ManagerController {
 		model.addAttribute("depts", deptJson);
 		model.addAttribute("majors", majorJson);
 
+		if (message != null && !message.equals(""))
+			model.addAttribute("message", message);
+
 		return "manager/managerUser";
+	}
+
+	@RequestMapping("searchTeacher")
+	public String searchTeacher(Model model, @RequestParam String content) {
+		String teacherJson = managerService.searchTeacher(content);
+		model.addAttribute("teachers", teacherJson);
+
+		return "manager/managerTeacher";
+	}
+
+	@RequestMapping("searchStudent")
+	public String searchStedent(Model model, @RequestParam String content) {
+		String studentJson = managerService.searchStudent(content);
+		model.addAttribute("students", studentJson);
+		return "manager/managerStudent";
+	}
+
+	@RequestMapping("feedback")
+	public String handleFeedback(Model model) {
+		String feedback = managerService.getFeedback();
+		model.addAttribute("feedback", feedback);
+		return "manager/manegerFeedback";
+	}
+
+	@RequestMapping("deleteFeedback")
+	public String deleteFeedback(@RequestParam int id) {
+		managerService.deleteFeedback(id);
+		return "redirect:/manager/feedback";
 	}
 }

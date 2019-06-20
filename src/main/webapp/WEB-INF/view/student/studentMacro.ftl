@@ -31,7 +31,7 @@
                                 <i class="icon-user"></i>联系
                             </a>
                             <ul id="contact" class="collapse list-unstyled ">
-                                <li><a href="${ctx}/student/temp">班级通讯录</a></li>
+                                <li><a href="${ctx}/student/contact">班级通讯录</a></li>
                             </ul>
                         </li>
                         <li>
@@ -46,7 +46,7 @@
                     <span class="heading">Extras</span>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#">
+                            <a href="${ctx}/student/feedback">
                                 <i class="icon-mail"></i>意见反馈
                             </a>
                         </li>

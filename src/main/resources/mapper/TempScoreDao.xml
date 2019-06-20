@@ -12,16 +12,25 @@
                      column="student_id"
                      select="org.zrquan.sms.dao.StudentDao.getStudentById"/>
     </resultMap>
+    <update id="addTempScore">
+        update score_check
+        set value = #{score.value},
+            gpa   = #{score.gpa}
+        where course_id = #{score.course.id}
+          and student_id = #{score.student.id}
+    </update>
 
-    <insert id="addTempScore" parameterType="Score" useGeneratedKeys="true" keyProperty="id">
-        insert into score_check (course_id, student_id, value, gpa)
-        values (#{score.course.id}, #{score.student.id}, #{score.value}, #{score.gpa})
-    </insert>
 
     <delete id="deleteTempScore" parameterType="Score">
         delete
         from score_check
         where (student_id = #{score.student.id} and course_id = #{score.course.id})
+    </delete>
+
+    <delete id="deleteByCourseId">
+        delete
+        from score_check
+        where course_id = #{cid}
     </delete>
 
     <select id="getCourseStudentCount" resultType="java.lang.Integer">
@@ -38,6 +47,11 @@
             from student
             where snumber = #{number}
         )
+    </select>
+
+    <select id="retrieveScores" resultMap="TempScoreResultMap">
+        select *
+        from score_check;
     </select>
 
 </mapper>

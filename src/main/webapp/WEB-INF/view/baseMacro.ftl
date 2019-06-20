@@ -68,7 +68,8 @@
                                     <div class="brand-text d-none d-lg-inline-block">
                                         <strong>Score </strong><span>Management System</span>
                                     </div>
-                                    <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
+                                    <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>SMS</strong>
+                                    </div>
                                 </a>
                                 <!-- Toggle Button-->
                                 <a id="toggle-btn" href="#"
@@ -84,15 +85,15 @@
                                        aria-expanded="false"
                                        class="nav-link">
                                         <i class="fa fa-bell-o"></i>
-                                        <span class="badge bg-red badge-corner">12</span>
+                                        <span class="badge bg-red badge-corner">1</span>
                                     </a>
                                     <ul aria-labelledby="notifications" class="dropdown-menu">
                                         <li>
-                                            <a rel="nofollow" href="#" class="dropdown-item">
+                                            <a rel="nofollow" href="javascript:alert('还没做')" class="dropdown-item">
                                                 <div class="notification">
                                                     <div class="notification-content">
                                                         <i class="fa fa-envelope bg-green"></i>
-                                                        You have 6 new messages
+                                                        TODO: 消息通知
                                                     </div>
                                                     <div class="notification-time">
                                                         <small>4 minutes ago</small>
@@ -101,20 +102,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a rel="nofollow" href="#" class="dropdown-item">
-                                                <div class="notification">
-                                                    <div class="notification-content">
-                                                        <i class="fa fa-twitter bg-blue"></i>
-                                                        You have 2 followers
-                                                    </div>
-                                                    <div class="notification-time">
-                                                        <small>4 minutes ago</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a rel="nofollow" href="#"
+                                            <a rel="nofollow" href="javascript:alert('都说没做了')"
                                                class="dropdown-item all-notifications text-center">
                                                 <strong>view all notifications </strong>
                                             </a>
@@ -146,12 +134,13 @@
         <script src="js/jquery.table2excel.js"></script>
         <!-- Main File-->
         <script src="js/front.js"></script>
-        <script src="js/myfunctions.js"></script>
 
         <#-- 遍历扩展页js -->
         <#list base_js as j>
             <script src="${j}"></script>
         </#list>
+
+        <script src="js/myfunctions.js"></script>
         </body>
         </html>
     </#macro>

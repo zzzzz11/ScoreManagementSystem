@@ -20,7 +20,6 @@
             <param-value>classpath:spring/spring-*.xml</param-value>
         </init-param>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>seckill-dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
@@ -35,7 +34,6 @@
             <param-value>UTF-8</param-value>
         </init-param>
     </filter>
-
     <filter-mapping>
         <filter-name>CharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>

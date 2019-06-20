@@ -1,10 +1,8 @@
 package org.zrquan.sms.service;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.zrquan.sms.BaseTest;
-import org.zrquan.sms.entity.Teacher;
 
 public class ManagerServiceImplTest extends BaseTest {
 	@Autowired
@@ -19,8 +17,11 @@ public class ManagerServiceImplTest extends BaseTest {
 
 	@Test
 	public void testAddTeacher() {
-		Teacher teacher = setTestTeacher();
-		boolean flag = managerService.addTeacher(teacher, 1);
-		Assert.assertTrue(flag);
+	}
+
+	@Test
+	public void testGetAuditStudent() {
+		String json = managerService.getAuditStudent(4);
+		System.out.println(json);
 	}
 }

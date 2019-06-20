@@ -23,7 +23,7 @@
                                 <i class="icon-flask"></i>教学
                             </a>
                             <ul id="education" class="collapse list-unstyled ">
-                                <li><a href="${ctx}/teacher/course">课程查询</a></li>
+                                <li><a href="${ctx}/teacher/course">课程信息</a></li>
                             </ul>
                         </li>
                         <li>
@@ -31,7 +31,7 @@
                                 <i class="icon-user"></i>联系
                             </a>
                             <ul id="contact" class="collapse list-unstyled ">
-                                <li><a href="${ctx}/teacher/temp">班级通讯录</a></li>
+                                <li><a href="${ctx}/teacher/contact">班级通讯录</a></li>
                             </ul>
                         </li>
                         <li>

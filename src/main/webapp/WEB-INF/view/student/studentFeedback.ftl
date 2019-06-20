@@ -1,5 +1,6 @@
-<#include "teacherMacro.ftl">
-<@teacher keywords="教师信息" js=[] css=["css/quill.snow.css"]>
+<#include "studentMacro.ftl">
+<@student keywords="学生信息" js=[] css=["css/quill.snow.css"]>
+
     <header class="page-header">
         <div class="container-fluid">
             <h2 class="no-margin-bottom">意见反馈</h2>
@@ -27,7 +28,7 @@
                             </div>
                         </div>
                         <div class="card-header d-flex align-items-center">
-                            <h4 class="h4">Feedback</h4>
+                            <h4 class="h4">Profile</h4>
                         </div>
 
                         <div class="card-body">
@@ -46,4 +47,4 @@
             theme: 'snow'
         });
     </script>
-</@teacher>
+</@student>

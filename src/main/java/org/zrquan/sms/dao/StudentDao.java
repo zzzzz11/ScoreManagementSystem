@@ -15,4 +15,6 @@ public interface StudentDao {
 	List<Student> retrieveStudent();
 
 	Double getCourseScore(@Param("courseId") int courseId, @Param("studentId") int studentId);
+
+	List<Student> searchByName(@Param("name") String name);
 }

@@ -34,4 +34,8 @@ public interface TeacherService {
 	 * @param teacher 教师对象
 	 */
 	boolean updateTeacher(Teacher teacher);
+
+	String getCourseScore(int courseId);
+
+	String getCourseTempScore(int courseId);
 }

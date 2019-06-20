@@ -13,6 +13,11 @@
                      select="org.zrquan.sms.dao.StudentDao.getStudentById"/>
     </resultMap>
 
+    <insert id="addScore" parameterType="Score">
+        insert into score(course_id, student_id, value, identity, gpa)
+        VALUES (#{score.course.id}, #{score.student.id}, #{score.value}, #{score.identity}, #{score.gpa})
+    </insert>
+
     <select id="getScoreByStudentNumber" resultMap="ScoreResultMap">
         select *
         from score
@@ -39,6 +44,17 @@
 
     <select id="getCourseStudentCount" resultType="java.lang.Integer">
         select COUNT(student_id)
+        from score
+        where course_id = #{courseId}
+    </select>
+
+    <select id="retrieveScores" resultMap="ScoreResultMap">
+        select *
+        from score
+    </select>
+
+    <select id="getCourseById" resultMap="ScoreResultMap">
+        select *
         from score
         where course_id = #{courseId}
     </select>

@@ -6,7 +6,7 @@
         <result column="snumber" jdbcType="VARCHAR" property="number"/>
         <result column="sname" jdbcType="VARCHAR" property="name"/>
         <result column="class" jdbcType="VARCHAR" property="clazz"/>
-        <result column="gba" jdbcType="INTEGER" property="gba"/>
+        <result column="gpa" jdbcType="INTEGER" property="gpa"/>
         <result column="credit" jdbcType="DOUBLE" property="credit"/>
         <association property="major"
                      column="major_id"
@@ -40,6 +40,13 @@
         from score
         where course_id = #{courseId}
           and student_id = #{studentId}
+    </select>
+
+    <select id="searchByName" resultMap="StudentResultMap">
+        <bind name="pattern" value="'%' + name + '%'"/>
+        select *
+        from student
+        where sname like #{pattern}
     </select>
 
 </mapper>

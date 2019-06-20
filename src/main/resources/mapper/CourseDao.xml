@@ -74,6 +74,6 @@
         select value
         from score
         where course_id = #{courseId}
-        order by value asc
+        order by value desc
     </select>
 </mapper>

@@ -1,9 +1,9 @@
 <#include "teacherMacro.ftl">
-<@teacher keywords="教师课程查看" js=[]>
+<@teacher keywords="教师成绩提交" js=["js/bootstable.js"]>
 
     <header class="page-header">
         <div class="container-fluid">
-            <h2 class="no-margin-bottom">成绩详情</h2>
+            <a href="${ctx}/teacher/course">课程信息</a> / 成绩详情
         </div>
     </header>
 
@@ -19,67 +19,88 @@
                                 </button>
                                 <div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow">
                                     <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a>
-                                    <a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a>
-                                    <a href="javascript:void(0)" class="dropdown-item edit" onclick="exportExcel()"><i
-                                                class="fa fa-gear"></i>export
+                                    <a href="javascript:void(0)" class="dropdown-item edit"
+                                       onclick="exportExcel('#scoreAudit')"><i
+                                                class="fa fa-gear"></i>Export
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="card-header d-flex align-items-center">
-                            <h3 class="h4">成绩查询</h3>
+                            <h3 class="h4">成绩查看</h3>
                         </div>
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="scoreEditTable" class="table table-striped table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>学号</th>
-                                        <th>姓名</th>
-                                        <th>成绩</th>
-                                        <th>绩点</th>
-                                        <th>排名</th>
-                                        <th>是否及格</th>
-                                        <th>审核状态</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>16369001</td>
-                                        <td>甲</td>
-                                        <td>61</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>是</td>
-                                        <td></td>
-                                        <td>
-                                            <button id="btn" class="btn btn-primary" onclick="edit();">编辑</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>16369002</td>
-                                        <td>乙</td>
-                                        <td>59</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>否</td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>16369011</td>
-                                        <td>丙</td>
-                                        <td>69</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>是</td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <#if scores != "">
+                                    <#assign scoreText = scores>
+                                    <#assign scoreJson = scoreText?eval>
+                                    <#if isCheck = false>
+                                        <table id="editTable" class="table table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>学号</th>
+                                                <th>姓名</th>
+                                                <th>成绩</th>
+                                                <th>绩点</th>
+                                                <th>专业</th>
+                                                <th>课程学分</th>
+                                                <th>审核状态</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <#list scoreJson as score>
+                                                <tr>
+                                                    <td class="snumber">${score.student.number}</td>
+                                                    <td>${score.student.name}</td>
+                                                    <#if score.value != 0>
+                                                        <td class="score-value">${score.value}</td>
+                                                        <td class="gpa">${(score.value - 50)/10}</td>
+                                                    <#else>
+                                                        <td class="score-value">未登记</td>
+                                                        <td class="gpa">未登记</td>
+                                                    </#if>
+                                                    <td>${score.student.major.name}</td>
+                                                    <td>${score.course.credit}</td>
+                                                    <td>未通过</td>
+                                                </tr>
+                                            </#list>
+                                            </tbody>
+                                        </table>
+                                    <#else>
+                                        <table id="scoreAudit" class="table table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>学号</th>
+                                                <th>姓名</th>
+                                                <th>成绩</th>
+                                                <th>绩点</th>
+                                                <th>专业</th>
+                                                <th>学分</th>
+                                                <th>审核状态</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <#list scoreJson as score>
+                                                <tr>
+                                                    <td>${score.student.number}</td>
+                                                    <td>${score.student.name}</td>
+                                                    <td>${score.value}</td>
+                                                    <td>${(score.value - 50)/10}</td>
+                                                    <td>${score.student.major.name}</td>
+                                                    <td>${score.course.credit}</td>
+                                                    <td>已通过</td>
+                                                </tr>
+                                            </#list>
+                                            </tbody>
+                                        </table>
+                                    </#if>
+                                    <#if isCheck = false>
+                                        <button class="btn btn-primary" id="submitScore">提交成绩</button>
+                                    </#if>
+                                <#else>
+                                    <div class="alert alert-danger"><h3>该课程没有学生</h3></div>
+                                </#if>
                             </div>
                         </div>
                     </div>
@@ -87,18 +108,4 @@
             </div>
         </div>
     </section>
-
-    <script type="text/javascript">
-        function edit() {
-            let mod = document.getElementById("btn").parentElement.parentElement.children[2];
-            mod.innerHTML = "<input type=text />";
-            document.getElementById("btn").parentElement.innerHTML = "<button id=\"btn\" class=\"btn btn-primary\" onclick=\"modify();\">修改</button>";
-        }
-
-        function modify() {
-            let mod = document.getElementById("btn").parentElement.parentElement.children[2];
-            mod.innerHTML = "修改后的值";
-            document.getElementById("btn").parentElement.innerHTML = "<button id=\"btn\" class=\"btn btn-primary\" onclick=\"edit();\">编辑</button>";
-        }
-    </script>
 </@teacher>

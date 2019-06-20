@@ -17,8 +17,8 @@ public class Student {
 	@JSONField(name = "clazz")
 	private String clazz;
 
-	@JSONField(name = "gba")
-	private double gba;
+	@JSONField(name = "gpa")
+	private double gpa;
 
 	@JSONField(name = "credit")
 	private int credit;
@@ -63,12 +63,12 @@ public class Student {
 		this.clazz = clazz;
 	}
 
-	public double getGba() {
-		return gba;
+	public double getGpa() {
+		return gpa;
 	}
 
-	public void setGba(double gba) {
-		this.gba = gba;
+	public void setGpa(double gpa) {
+		this.gpa = gpa;
 	}
 
 	public int getCredit() {
